@@ -2,21 +2,27 @@
 import { Component } from 'react';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
+import { Card } from './components/card';
+import type { CardProps } from './components/card';
 
 interface IState {
   text: string;
-  content: [];
+  content: CardProps[];
+  loading: boolean;
 }
 
-class App extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state: IState = {
-    text: 'Test',
-    content: [],
-  };
+class App extends Component<unknown, IState> {
+  constructor(props: unknown) {
+    super(props);
+    this.state = {
+      text: localStorage.getItem('test') ?? '',
+      content: [],
+      loading: false,
+    };
+  }
 
   componentDidMount() {
-    this.loadContent();
+    this.startSearch();
   }
 
   componentDidUpdate(): void {
@@ -24,28 +30,27 @@ class App extends Component {
     console.log(this.state.content);
   }
 
-  loadContent = () => {
+  startSearch = async () => {
     const { text } = this.state;
-    console.log('делаем запрос');
-    fetch(`https://swapi.dev/api/people/?search=${text}`)
-      .then((response) => response.json())
-      .then((data) => this.setState({ content: data.results }));
+    this.setState({ loading: true });
+    const response = await fetch(
+      `https://swapi.dev/api/people/?search=${text}`
+    );
+    const data = await response.json();
+    this.setState({ content: data.results, loading: false });
   };
 
-  startSearch = () => {
-    this.loadContent();
-  };
-
-  handleInputChange = (event: { target: { value: unknown } }) => {
-    console.log(event.target.value);
+  handleInputChange = (event: { target: { value: string } }) => {
     const myValue = event.target.value;
+    localStorage.setItem('test', myValue);
     this.setState({
       text: myValue,
     });
   };
 
   render() {
-    const { text } = this.state;
+    const { text, content, loading } = this.state;
+
     return (
       <div>
         <div>
@@ -54,6 +59,19 @@ class App extends Component {
         </div>
         <div>
           <p>Results:</p>
+          {loading && <p>Loading....</p>}
+          {content.length && !loading
+            ? content.map((el) => (
+                <Card
+                  key={el.name}
+                  name={el.name}
+                  birth={el.birth}
+                  height={el.height}
+                  mass={el.mass}
+                  gender={el.gender}
+                />
+              ))
+            : !loading && <div>Not found!</div>}
         </div>
       </div>
     );

@@ -8,8 +8,7 @@ interface CardProps {
   gender: string;
 }
 
-// eslint-disable-next-line react/prefer-stateless-function
-class MyInput extends React.Component<CardProps> {
+class Card extends React.PureComponent<CardProps> {
   render(): JSX.Element {
     const { name, birth, height, mass, gender } = this.props;
     return (
@@ -24,4 +23,5 @@ class MyInput extends React.Component<CardProps> {
   }
 }
 
-export default MyInput;
+export { Card };
+export type { CardProps };
