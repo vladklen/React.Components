@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import React, { Component } from 'react';
+import { Component } from 'react';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
 
@@ -8,7 +8,7 @@ interface IState {
   content: [];
 }
 
-class App extends Component<IState> {
+class App extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state: IState = {
     text: 'Test',
