@@ -1,8 +1,9 @@
 import React from 'react';
+import { StyledCard } from './UI/Styles';
 
 interface CardProps {
+  birth_year: string;
   name: string;
-  birth: string;
   height: string;
   mass: string;
   gender: string;
@@ -10,15 +11,16 @@ interface CardProps {
 
 class Card extends React.PureComponent<CardProps> {
   render(): JSX.Element {
-    const { name, birth, height, mass, gender } = this.props;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { name, birth_year, height, mass, gender } = this.props;
     return (
-      <div>
-        <h3>{name}</h3>
-        <p>{birth}</p>
-        <p>{height}</p>
-        <p>{mass}</p>
-        <p>{gender}</p>
-      </div>
+      <StyledCard>
+        <h3>Name:{name}</h3>
+        <p>BirthDate:{birth_year}</p>
+        <p>Height:{height}</p>
+        <p>Mass:{mass}</p>
+        <p>Gender:{gender}</p>
+      </StyledCard>
     );
   }
 }

@@ -1,5 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { ChangeEventHandler } from 'react';
+import { StyledInput } from './Styles';
 
 interface IInputState {
   message: string;
@@ -9,7 +10,7 @@ interface IInputState {
 class MyInput extends React.Component<IInputState> {
   render(): JSX.Element {
     return (
-      <input
+      <StyledInput
         type="text"
         defaultValue={this.props.message}
         onChange={this.props.change}

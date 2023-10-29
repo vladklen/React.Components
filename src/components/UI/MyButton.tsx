@@ -1,8 +1,10 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { StyledButton } from './Styles';
 
 interface IButtonProps {
   message: string;
+  color: string;
   click: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -22,9 +24,13 @@ class MyButton extends React.Component<IButtonProps, IButtonState> {
 
   render(): JSX.Element {
     return (
-      <button type="button" onClick={this.state.clickHandler}>
+      <StyledButton
+        type="button"
+        $inputColor={this.props.color}
+        onClick={this.state.clickHandler}
+      >
         {this.state.buttonText}{' '}
-      </button>
+      </StyledButton>
     );
   }
 }

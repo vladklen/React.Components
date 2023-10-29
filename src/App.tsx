@@ -2,8 +2,9 @@
 import { Component } from 'react';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
-import { Card } from './components/card';
-import type { CardProps } from './components/card';
+import { Card } from './components/Card';
+import type { CardProps } from './components/Card';
+import { ContentWrapper, SearchWrapper } from './components/UI/Styles';
 
 interface IState {
   text: string;
@@ -48,31 +49,44 @@ class App extends Component<unknown, IState> {
     });
   };
 
+  // eslint-disable-next-line class-methods-use-this
+  throwError = async () => {
+    try {
+      await Promise.reject();
+    } catch (error) {
+      this.setState(() => {
+        throw error;
+      });
+    }
+  };
+
   render() {
     const { text, content, loading } = this.state;
+    console.log(content);
 
     return (
       <div>
-        <div>
+        <SearchWrapper>
           <MyInput message={text} change={this.handleInputChange} />
-          <MyButton click={this.startSearch} message="Search" />
-        </div>
-        <div>
-          <p>Results:</p>
+          <MyButton click={this.startSearch} color="blue" message="Search" />
+          <MyButton click={this.throwError} color="red" message="Error Test" />
+        </SearchWrapper>
+        <h2>Results:</h2>
+        <ContentWrapper>
           {loading && <p>Loading....</p>}
           {content.length && !loading
             ? content.map((el) => (
                 <Card
                   key={el.name}
                   name={el.name}
-                  birth={el.birth}
+                  birth_year={el.birth_year}
                   height={el.height}
                   mass={el.mass}
                   gender={el.gender}
                 />
               ))
             : !loading && <div>Not found!</div>}
-        </div>
+        </ContentWrapper>
       </div>
     );
   }
