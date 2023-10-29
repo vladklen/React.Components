@@ -1,37 +1,63 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react/button-has-type */
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '../../../../../../../../vite.svg';
-import './App.css';
+/* eslint-disable react/no-unused-prop-types */
+import React, { Component } from 'react';
+import MyInput from './components/UI/MyInput';
+import MyButton from './components/UI/MyButton';
 
-function App() {
-  const [count, setCount] = useState(0);
+interface IState {
+  text: string;
+  content: [];
+}
 
-  return (
-    <>
+class App extends Component<IState> {
+  // eslint-disable-next-line react/state-in-constructor
+  state: IState = {
+    text: 'Test',
+    content: [],
+  };
+
+  componentDidMount() {
+    this.loadContent();
+  }
+
+  componentDidUpdate(): void {
+    // eslint-disable-next-line react/destructuring-assignment
+    console.log(this.state.content);
+  }
+
+  loadContent = () => {
+    const { text } = this.state;
+    console.log('делаем запрос');
+    fetch(`https://swapi.dev/api/people/?search=${text}`)
+      .then((response) => response.json())
+      .then((data) => this.setState({ content: data.results }));
+  };
+
+  startSearch = () => {
+    this.loadContent();
+  };
+
+  handleInputChange = (event: { target: { value: unknown } }) => {
+    console.log(event.target.value);
+    const myValue = event.target.value;
+    this.setState({
+      text: myValue,
+    });
+  };
+
+  render() {
+    const { text } = this.state;
+    return (
       <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div>
+          <MyInput message={text} change={this.handleInputChange} />
+          <MyButton click={this.startSearch} message="Search" />
+        </div>
+        <div>
+          <p>Results:</p>
+        </div>
       </div>
-      <h1>Hello World! </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+    );
+  }
 }
 
 export default App;

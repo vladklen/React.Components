@@ -46,5 +46,6 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/prefer-stateless-function': ['warn', { ignorePureComponents: true }],
   },
 };
