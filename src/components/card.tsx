@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledCard } from './UI/Styles';
 
-interface CardProps {
+export interface CardProps {
   birth_year: string;
   name: string;
   height: string;
@@ -26,4 +26,3 @@ class Card extends React.PureComponent<CardProps> {
 }
 
 export { Card };
-export type { CardProps };

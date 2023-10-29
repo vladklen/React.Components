@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { StyledButton } from './Styles';
 
@@ -23,13 +22,11 @@ class MyButton extends React.Component<IButtonProps, IButtonState> {
   }
 
   render(): JSX.Element {
+    const { color } = this.props;
+    const { clickHandler, buttonText } = this.state;
     return (
-      <StyledButton
-        type="button"
-        $inputColor={this.props.color}
-        onClick={this.state.clickHandler}
-      >
-        {this.state.buttonText}{' '}
+      <StyledButton type="button" $inputColor={color} onClick={clickHandler}>
+        {buttonText}{' '}
       </StyledButton>
     );
   }

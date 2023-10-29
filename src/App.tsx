@@ -1,9 +1,8 @@
-/* eslint-disable react/no-unused-prop-types */
 import { Component } from 'react';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
-import { Card } from './components/Card';
 import type { CardProps } from './components/Card';
+import { Card } from './components/Card';
 import { ContentWrapper, SearchWrapper } from './components/UI/Styles';
 
 interface IState {
