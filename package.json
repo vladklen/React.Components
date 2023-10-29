@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 100",
     "format:fix": "prettier --write .",
     "preview": "vite preview",
-    "prepare": "cd .. && husky install React.Components./.husky"
+    "prepare": "husky install"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
