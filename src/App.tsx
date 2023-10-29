@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { ColorRing } from 'react-loader-spinner';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
 import { Card, CardProps } from './components/Сard';
@@ -71,7 +72,17 @@ class App extends Component<unknown, IState> {
         </SearchWrapper>
         <h2>Results:</h2>
         <ContentWrapper>
-          {loading && <p>Loading....</p>}
+          {loading && (
+            <ColorRing
+              visible
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />
+          )}
           {content.length && !loading
             ? content.map((el) => (
                 <Card
@@ -83,7 +94,7 @@ class App extends Component<unknown, IState> {
                   gender={el.gender}
                 />
               ))
-            : !loading && <div>Not found!</div>}
+            : !loading && <h3>Not found!</h3>}
         </ContentWrapper>
       </div>
     );
