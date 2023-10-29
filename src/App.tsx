@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import MyInput from './components/UI/MyInput';
 import MyButton from './components/UI/MyButton';
-import type { CardProps } from './components/Card';
-import { Card } from './components/Card';
+import { Card, CardProps } from './components/Сard';
 import { ContentWrapper, SearchWrapper } from './components/UI/Styles';
 
 interface IState {
