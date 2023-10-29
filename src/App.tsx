@@ -48,7 +48,6 @@ class App extends Component<unknown, IState> {
     });
   };
 
-  // eslint-disable-next-line class-methods-use-this
   throwError = async () => {
     try {
       await Promise.reject();
