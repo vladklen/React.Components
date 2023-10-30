@@ -24,10 +24,11 @@ a:hover {
 }
 
 body {
+  margin: 0px;
   width: 100%;
-  margin: 10px;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #bdc1c6;
 }
 
 h1 {
