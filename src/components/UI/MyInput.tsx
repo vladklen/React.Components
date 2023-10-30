@@ -6,7 +6,7 @@ interface IInputState {
   change: ChangeEventHandler<HTMLInputElement>;
 }
 
-class MyInput extends React.Component<IInputState> {
+class MyInput extends React.PureComponent<IInputState> {
   render(): JSX.Element {
     const { message, change } = this.props;
     return <StyledInput type="text" defaultValue={message} onChange={change} />;

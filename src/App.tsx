@@ -25,11 +25,6 @@ class App extends Component<unknown, IState> {
     this.startSearch();
   }
 
-  componentDidUpdate(): void {
-    // eslint-disable-next-line react/destructuring-assignment
-    console.log(this.state.content);
-  }
-
   startSearch = async () => {
     const { text } = this.state;
     this.setState({ loading: true });
@@ -60,7 +55,6 @@ class App extends Component<unknown, IState> {
 
   render() {
     const { text, content, loading } = this.state;
-    console.log(content);
 
     return (
       <div>
