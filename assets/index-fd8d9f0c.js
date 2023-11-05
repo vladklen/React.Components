@@ -46,11 +46,12 @@ See https://reactjs.org/docs/forms.html#controlled-components`),H=T.initialPage?
   font-size: 1em;
   margin: 1em;
   background-color: none;
-  padding: 0.25em 1em;
+  padding: 0.8em 1.3em;
   border: 2px solid ${wd};
   border-radius: 3px;
 `,I1=nn.input`
-  width: 500px;
+  width: 80%;
+  height: 35px;
   padding: 0.5em;
   margin: 0.5em;
   color: ${e=>e.$inputColor||qa};
@@ -129,7 +130,7 @@ See https://reactjs.org/docs/forms.html#controlled-components`),H=T.initialPage?
 `,B1=nn.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
