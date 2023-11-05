@@ -1,12 +1,17 @@
 import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 
+const backgroundColor = '#bdc1c6';
+const mainColor = '#BF4F74';
+const secondColor = '#00897B';
+
 const StyledButton = styled.button<{ $inputColor?: string }>`
-  color: ${(props) => props.$inputColor || '#BF4F74'};
+  color: ${secondColor};
   font-size: 1em;
   margin: 1em;
+  background-color: none;
   padding: 0.25em 1em;
-  border: 2px solid ${(props) => props.$inputColor || '#BF4F74'};
+  border: 2px solid ${secondColor};
   border-radius: 3px;
 `;
 
@@ -14,7 +19,7 @@ const StyledInput = styled.input<{ $inputColor?: string }>`
   width: 500px;
   padding: 0.5em;
   margin: 0.5em;
-  color: ${(props) => props.$inputColor || '#BF4F74'};
+  color: ${(props) => props.$inputColor || mainColor};
   background: papayawhip;
   border: none;
   border-radius: 3px;
@@ -28,7 +33,7 @@ const StyledCard = styled.div`
   border: 2px solid white;
   border-radius: 10px;
   background-color: papayawhip;
-  color: #bf4f74;
+  color: ${mainColor};
   width: 300px;
   padding: 0px 0px 20px 0px;
   &:hover {
@@ -46,7 +51,7 @@ const StyledPersonalCard = styled.div`
   border: 2px solid white;
   border-radius: 10px;
   background-color: grey;
-  color: #bf4f74;
+  color: ${mainColor};
   padding: 0px 0px 20px 0px;
   img {
     width: 100%;
@@ -75,7 +80,7 @@ const StyledPaginate = styled(ReactPaginate)`
     color: #bf4f74;
     text-transform: uppercase;
     transition: all 0.3s;
-    border: 2px solid #bf4f74;
+    border: 2px solid ${mainColor};
     cursor: pointer;
     min-height: 2rem;
     line-height: normal;
