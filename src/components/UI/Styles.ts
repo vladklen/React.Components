@@ -31,7 +31,8 @@ const StyledCard = styled.div`
   width: 300px;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ $isOpen: boolean }>`
+  overflow: ${(props) => (props.$isOpen ? 'hidden' : 'scroll')};
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -50,4 +51,19 @@ const SearchWrapper = styled.div`
   gap: 10px;
 `;
 
-export { StyledButton, StyledInput, StyledCard, ContentWrapper, SearchWrapper };
+const ModalWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+`;
+
+export {
+  StyledButton,
+  StyledInput,
+  StyledCard,
+  ContentWrapper,
+  SearchWrapper,
+  ModalWrapper,
+};

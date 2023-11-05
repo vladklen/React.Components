@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
@@ -71,7 +69,7 @@ export default function Home() {
         <MyButton click={handleSearchStart} color="blue" message="Search" />
       </SearchWrapper>
       <h2>Results:</h2>
-      <ContentWrapper onClick={modalWindowHandler}>
+      <ContentWrapper $isOpen={cardOpen}>
         {loading && (
           <ColorRing
             visible
