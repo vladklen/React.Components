@@ -10,13 +10,14 @@ const StyledButton = styled.button<{ $inputColor?: string }>`
   font-size: 1em;
   margin: 1em;
   background-color: none;
-  padding: 0.25em 1em;
+  padding: 0.8em 1.3em;
   border: 2px solid ${secondColor};
   border-radius: 3px;
 `;
 
 const StyledInput = styled.input<{ $inputColor?: string }>`
-  width: 500px;
+  width: 80%;
+  height: 35px;
   padding: 0.5em;
   margin: 0.5em;
   color: ${(props) => props.$inputColor || mainColor};
@@ -105,7 +106,7 @@ const ContentWrapper = styled.div<{ $isOpen: boolean }>`
 const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
