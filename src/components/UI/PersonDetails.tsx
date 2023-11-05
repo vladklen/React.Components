@@ -1,40 +1,36 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import { ModalWrapper, StyledCard } from './Styles';
-
-// interface CardProps {
-//   birth_year: string;
-//   name: string;
-//   height: string;
-//   mass: string;
-//   gender: string;
-// }
+import { ModalWrapper, StyledPersonalCard } from './Styles';
+import { IAnime } from '../../pages/Home';
 
 export default function PersonDetails() {
-  let navigate = useNavigate();
-  const { name } = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState<IAnime | null>(null);
 
   useEffect(() => {
     const startSearch = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://swapi.dev/api/people/?search=${name}`
-      );
-      const data = await response.json();
+      const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+      const data: { data: IAnime } = await response.json();
       setLoading(false);
-      setContent(data.results);
+      setContent(data.data);
     };
     startSearch();
-  }, [name]);
+  }, [id]);
 
   return (
     <ModalWrapper onClick={() => navigate(-1)}>
-      <StyledCard>
-        {content.length && !loading ? (
-          <h3>Name: {content[0].name}</h3>
+      <StyledPersonalCard>
+        {content && !loading ? (
+          <>
+            <h3>Title: {content.title}</h3>
+            <img src={content.images.jpg.image_url} alt={content.title} />
+            <p>Episodes: {content.episodes}</p>
+            <p>Score: {content.score}</p>
+          </>
         ) : (
           <ColorRing
             visible
@@ -46,7 +42,7 @@ export default function PersonDetails() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-      </StyledCard>
+      </StyledPersonalCard>
     </ModalWrapper>
   );
 }

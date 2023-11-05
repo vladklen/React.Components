@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { StyledPaginate } from './Styles';
 
 interface IPaginationProps {
   postsPerPage: number;
@@ -12,39 +13,33 @@ export default function Pagination(props: IPaginationProps) {
   const [search, setSearch] = useSearchParams();
   const { postsPerPage, totalPosts, loading } = props;
   const [activePage, setActivePage] = useState(1);
-  const pageNumbers = [];
+  const pageNumbers = Math.ceil(totalPosts / postsPerPage);
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i += 1) {
-    pageNumbers.push(i);
-  }
-
-  const changePage = (page: number) => {
-    setActivePage(page);
+  const handlePageClick = (event: { selected: number }) => {
+    const page = event.selected;
     let params = {};
     for (const [key, value] of search) {
-      params = { ...params, [key]: value, page };
+      params = { ...params, [key]: value, page: page + 1 };
     }
+    setActivePage(page);
     setSearch(params);
   };
+
   if (loading) {
     return null;
   }
 
   return (
-    <div>
-      <ul>
-        {pageNumbers.map((page) => (
-          <li key={page}>
-            <button
-              type="button"
-              style={{ backgroundColor: activePage === page ? 'blue' : 'grey' }}
-              onClick={() => changePage(page)}
-            >
-              {page}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <StyledPaginate
+      activeClassName="active"
+      forcePage={activePage}
+      breakLabel="..."
+      nextLabel="next >"
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={5}
+      pageCount={pageNumbers}
+      previousLabel="< prev"
+      renderOnZeroPageCount={null}
+    />
   );
 }

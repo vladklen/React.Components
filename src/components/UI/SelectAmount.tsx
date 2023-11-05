@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { StyledSelect } from './Styles';
 
 const options = [
   { value: '1', label: '1' },
@@ -22,7 +23,7 @@ export default function SelectAmount() {
   };
 
   return (
-    <div>
+    <StyledSelect>
       <select
         value={search.get('limit') || options[2].value}
         onChange={handleChange}
@@ -33,6 +34,6 @@ export default function SelectAmount() {
           </option>
         ))}
       </select>
-    </div>
+    </StyledSelect>
   );
 }
