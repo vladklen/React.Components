@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 
-const backgroundColor = '#bdc1c6';
+// const backgroundColor = '#bdc1c6';
 const mainColor = '#BF4F74';
 const secondColor = '#00897B';
 
