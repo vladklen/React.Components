@@ -68,6 +68,7 @@ See https://reactjs.org/docs/forms.html#controlled-components`),H=T.initialPage?
   background-color: papayawhip;
   color: ${qa};
   width: 300px;
+  height: 300px;
   padding: 0px 0px 20px 0px;
   &:hover {
     transform: scale(1.03);
