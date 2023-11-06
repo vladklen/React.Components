@@ -36,6 +36,7 @@ const StyledCard = styled.div`
   background-color: papayawhip;
   color: ${mainColor};
   width: 300px;
+  height: 300px;
   padding: 0px 0px 20px 0px;
   &:hover {
     transform: scale(1.03);
