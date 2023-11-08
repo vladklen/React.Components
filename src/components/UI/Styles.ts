@@ -2,18 +2,12 @@ import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 
 // const backgroundColor = '#bdc1c6';
+export const Colors = {
+  mainColor: '#BF4F74',
+  secondColor: '#00897B',
+};
 const mainColor = '#BF4F74';
-const secondColor = '#00897B';
-
-const StyledButton = styled.button<{ $inputColor?: string }>`
-  color: ${secondColor};
-  font-size: 1em;
-  margin: 1em;
-  background-color: none;
-  padding: 0.8em 1.3em;
-  border: 2px solid ${secondColor};
-  border-radius: 3px;
-`;
+// const secondColor = '#00897B';
 
 const StyledInput = styled.input<{ $inputColor?: string }>`
   width: 80%;
@@ -93,7 +87,7 @@ const StyledPaginate = styled(ReactPaginate)`
   }
 `;
 
-const ContentWrapper = styled.div<{ $isOpen: boolean }>`
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -133,7 +127,6 @@ const StyledSelect = styled.div`
 `;
 
 export {
-  StyledButton,
   StyledInput,
   StyledCard,
   ContentWrapper,

@@ -1,34 +1,14 @@
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import { Link, Outlet, useSearchParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
 import MyInput from '../components/UI/MyInput';
-import MyButton from '../components/UI/MyButton';
+import MyButton from '../components/UI/MyButton/MyButton';
 import { Card } from '../components/Сard';
 import Pagination from '../components/UI/Pagination';
 import SelectAmount from '../components/UI/SelectAmount';
-
-export interface IAnime {
-  mal_id: number;
-  title: string;
-  episodes: number;
-  score: number;
-  images: { jpg: { image_url: string } };
-}
-
-export interface IPaginations {
-  items: {
-    count: number;
-    per_page: number;
-    total: number;
-  };
-}
-
-export interface IDataResponse {
-  data: IAnime[];
-  pagination: IPaginations;
-}
+import getDataFromApi, { IAnime } from '../api/StartSearch';
 
 export default function Home() {
   const [search, setSearch] = useSearchParams();
@@ -37,8 +17,7 @@ export default function Home() {
   const [postsPerPage, setPostsPerPage] = useState(10);
   const [content, setContent] = useState<IAnime[] | []>([]);
   const [loading, setLoading] = useState(false);
-  const [cardOpen, setCardOpen] = useState(false);
-
+  const location = useLocation();
   let myValue = '';
 
   const handleInputChange = (event: { target: { value: string } }) => {
@@ -56,36 +35,35 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (cardOpen) {
-      return;
-    }
-    if (!search.get('search') && !search.get('page') && !search.get('limit')) {
-      if (localStorage.getItem('test')) {
-        setSearch({
-          search: String(localStorage.getItem('test')),
-          page: '1',
-          limit: '10',
-        });
-      } else {
-        setSearch({ page: '1', limit: '10' });
-      }
-      return;
-    }
     const startSearch = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://api.jikan.moe/v4/anime?q=${search.get(
-          'search'
-        )}&page=${search.get('page')}&limit=${search.get('limit')}`
-      );
-      const data: IDataResponse = await response.json();
+      const data = await getDataFromApi(search);
       setPostsPerPage(data.pagination.items.per_page);
       setLoading(false);
       setTotalPosts(data.pagination.items.total);
       setContent(data.data);
     };
-    startSearch();
-  }, [cardOpen, search, setSearch]);
+
+    if (location.pathname.length === 1) {
+      if (
+        !search.get('search') &&
+        !search.get('page') &&
+        !search.get('limit')
+      ) {
+        if (localStorage.getItem('test')) {
+          setSearch({
+            search: String(localStorage.getItem('test')),
+            page: '1',
+            limit: '10',
+          });
+        } else {
+          setSearch({ page: '1', limit: '10' });
+        }
+        return;
+      }
+      startSearch();
+    }
+  }, [location.pathname.length, search, setSearch]);
 
   return (
     <div>
@@ -94,7 +72,7 @@ export default function Home() {
         <MyButton click={handleSearchStart} color="blue" message="Search" />
       </SearchWrapper>
       <h2>Results:</h2>
-      <ContentWrapper $isOpen={cardOpen}>
+      <ContentWrapper>
         {loading && (
           <ColorRing
             visible
@@ -108,11 +86,7 @@ export default function Home() {
         )}
         {content.length && !loading
           ? content.map((el: IAnime) => (
-              <Link
-                to={`details/${el.mal_id}`}
-                key={el.mal_id}
-                onClick={() => setCardOpen(true)}
-              >
+              <Link to={`details/${el.mal_id}`} key={el.mal_id}>
                 <Card title={el.title} image={el.images.jpg.image_url} />
               </Link>
             ))

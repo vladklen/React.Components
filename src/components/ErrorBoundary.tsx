@@ -1,5 +1,5 @@
 import React from 'react';
-import MyButton from './UI/MyButton';
+import MyButton from './UI/MyButton/MyButton';
 
 interface IError {
   hasError: boolean;
