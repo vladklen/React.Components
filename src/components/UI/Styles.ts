@@ -5,20 +5,10 @@ import styled from 'styled-components';
 export const Colors = {
   mainColor: '#BF4F74',
   secondColor: '#00897B',
+  background: 'papayawhip',
 };
 const mainColor = '#BF4F74';
 // const secondColor = '#00897B';
-
-const StyledInput = styled.input<{ $inputColor?: string }>`
-  width: 80%;
-  height: 35px;
-  padding: 0.5em;
-  margin: 0.5em;
-  color: ${(props) => props.$inputColor || mainColor};
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-`;
 
 const StyledCard = styled.div`
   display: flex;
@@ -37,23 +27,10 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledPersonalCard = styled.div`
-  height: 100%;
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  border-radius: 10px;
-  background-color: grey;
-  color: ${mainColor};
-  padding: 0px 0px 20px 0px;
-  img {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-  }
+const StyledCardImage = styled.div`
+  min-height: 350px;
+  width: 200px;
+  background-size: cover;
 `;
 
 const StyledPaginate = styled(ReactPaginate)`
@@ -115,7 +92,7 @@ const ModalWrapper = styled.div`
   width: 100vw;
   display: flex;
   justify-content: flex-end;
-  color: black;
+  align-items: center;
   h3,
   p {
     color: black;
@@ -127,12 +104,11 @@ const StyledSelect = styled.div`
 `;
 
 export {
-  StyledInput,
   StyledCard,
   ContentWrapper,
   SearchWrapper,
   ModalWrapper,
   StyledPaginate,
-  StyledPersonalCard,
+  StyledCardImage,
   StyledSelect,
 };

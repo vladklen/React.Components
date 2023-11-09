@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
-import MyInput from '../components/UI/MyInput';
+import MyInput from '../components/UI/MyInput/MyInput';
 import MyButton from '../components/UI/MyButton/MyButton';
 import { Card } from '../components/Сard';
 import Pagination from '../components/UI/Pagination';
 import SelectAmount from '../components/UI/SelectAmount';
-import getDataFromApi, { IAnime } from '../api/StartSearch';
+import { getAnime, IAnime } from '../api/StartSearch';
 
 export default function Home() {
   const [search, setSearch] = useSearchParams();
@@ -37,7 +37,7 @@ export default function Home() {
   useEffect(() => {
     const startSearch = async () => {
       setLoading(true);
-      const data = await getDataFromApi(search);
+      const data = await getAnime(search);
       setPostsPerPage(data.pagination.items.per_page);
       setLoading(false);
       setTotalPosts(data.pagination.items.total);
@@ -60,6 +60,21 @@ export default function Home() {
           setSearch({ page: '1', limit: '10' });
         }
         return;
+      }
+      if (search.get('limit')) {
+        let params = {};
+        let limit: number = Number(search.get('limit'));
+        if (limit > 5) {
+          limit = 10;
+        } else if (limit > 1) {
+          limit = 5;
+        } else {
+          limit = 1;
+        }
+        for (const [key, value] of search) {
+          params = { ...params, [key]: value, limit: `${limit}` };
+        }
+        setSearch(params);
       }
       startSearch();
     }
