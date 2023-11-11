@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
 // components
-import PersonDetails from './components/UI/PersonalCard/PersonDetails';
+import PersonDetails from './components/PersonalCard/PersonDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

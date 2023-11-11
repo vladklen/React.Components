@@ -1,4 +1,4 @@
-import { StyledCard } from './UI/Styles';
+import { StyledCard, StyledCardPreview } from './Styles';
 
 interface CardProps {
   title: string;
@@ -9,7 +9,11 @@ function Card({ title, image }: CardProps) {
   return (
     <StyledCard>
       <h3>{title}</h3>
-      <img src={image} alt={title} />
+      <StyledCardPreview
+        style={{
+          backgroundImage: `url("${image}")`,
+        }}
+      />
     </StyledCard>
   );
 }

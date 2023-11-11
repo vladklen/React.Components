@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Colors } from '../Styles';
+import { Colors } from '../UI/Styles';
 
 const StyledPersonalCard = styled.div`
   max-height: 600px;
@@ -30,4 +30,10 @@ const StyledPersonalCardContent = styled.div`
   }
 `;
 
-export { StyledPersonalCard, StyledPersonalCardContent };
+const StyledCardImage = styled.div`
+  min-height: 350px;
+  width: 200px;
+  background-size: cover;
+`;
+
+export { StyledPersonalCard, StyledPersonalCardContent, StyledCardImage };

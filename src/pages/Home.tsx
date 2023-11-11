@@ -5,8 +5,8 @@ import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
 import MyInput from '../components/UI/MyInput/MyInput';
 import MyButton from '../components/UI/MyButton/MyButton';
-import { Card } from '../components/Сard';
-import Pagination from '../components/UI/Pagination';
+import { Card } from '../components/Card/Сard';
+import Pagination from '../components/UI/Pagination/Pagination';
 import SelectAmount from '../components/UI/SelectAmount';
 import { getAnime, IAnime } from '../api/StartSearch';
 

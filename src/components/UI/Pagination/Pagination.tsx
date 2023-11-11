@@ -38,11 +38,11 @@ export default function Pagination(props: IPaginationProps) {
       activeClassName="active"
       forcePage={activePage}
       breakLabel="..."
-      nextLabel="next >"
+      nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={5}
       pageCount={pageNumbers}
-      previousLabel="< prev"
+      previousLabel="<"
       renderOnZeroPageCount={null}
     />
   );

@@ -1,10 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import { ModalWrapper, StyledCardImage } from '../Styles';
-import { IAnime, getAnimeById } from '../../../api/StartSearch';
-import MyButton from '../MyButton/MyButton';
-import { StyledPersonalCard, StyledPersonalCardContent } from './Styles';
+import { ModalWrapper } from '../UI/Styles';
+import { IAnime, getAnimeById } from '../../api/StartSearch';
+import MyButton from '../UI/MyButton/MyButton';
+import {
+  StyledPersonalCard,
+  StyledPersonalCardContent,
+  StyledCardImage,
+} from './Styles';
 
 export default function PersonDetails() {
   const navigate = useNavigate();
