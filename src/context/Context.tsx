@@ -20,7 +20,7 @@ export const AppContext = createContext<ContextType>({
 });
 
 function AnimeContextProvider({ children }: Props) {
-  const [value, setValue] = useState(localStorage.getItem('test') ?? '');
+  const [value, setValue] = useState(window.localStorage.getItem('test') ?? '');
   const [data, setData] = useState<IAnime[]>([]);
 
   const context = useMemo(

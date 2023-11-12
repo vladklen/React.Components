@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699830154592" clover="3.2.0">
-  <project timestamp="1699830154592" name="All files">
-    <metrics statements="614" coveredstatements="578" conditionals="39" coveredconditionals="37" methods="20" coveredmethods="14" elements="673" coveredelements="629" complexity="0" loc="614" ncloc="614" packages="9" files="16" classes="16"/>
+<coverage generated="1699831781640" clover="3.2.0">
+  <project timestamp="1699831781640" name="All files">
+    <metrics statements="612" coveredstatements="576" conditionals="38" coveredconditionals="36" methods="20" coveredmethods="14" elements="670" coveredelements="626" complexity="0" loc="612" ncloc="612" packages="9" files="16" classes="16"/>
     <package name="components.Card">
       <metrics statements="64" coveredstatements="64" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="Styles.tsx" path="/Users/vlad/Desktop/RSschool/React stage3/12312/React.Components/src/components/Card/Styles.tsx">
@@ -76,9 +76,9 @@
       </file>
     </package>
     <package name="components.CardList">
-      <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <metrics statements="23" coveredstatements="23" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
       <file name="CardList.tsx" path="/Users/vlad/Desktop/RSschool/React stage3/12312/React.Components/src/components/CardList/CardList.tsx">
-        <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <metrics statements="23" coveredstatements="23" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -90,24 +90,18 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="30" type="cond" truecount="1" falsecount="0"/>
         <line num="11" count="30" type="stmt"/>
-        <line num="12" count="30" type="stmt"/>
-        <line num="13" count="30" type="stmt"/>
-        <line num="14" count="30" type="stmt"/>
-        <line num="15" count="30" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="15" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="30" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="stmt"/>
+        <line num="15" count="15" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="45" type="stmt"/>
         <line num="17" count="45" type="stmt"/>
         <line num="18" count="45" type="stmt"/>
         <line num="19" count="45" type="stmt"/>
         <line num="20" count="45" type="stmt"/>
         <line num="21" count="45" type="stmt"/>
-        <line num="22" count="45" type="stmt"/>
-        <line num="23" count="15" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="15" type="stmt"/>
-        <line num="25" count="15" type="stmt"/>
-        <line num="26" count="30" type="stmt"/>
-        <line num="27" count="30" type="stmt"/>
-        <line num="28" count="30" type="stmt"/>
-        <line num="29" count="30" type="stmt"/>
+        <line num="22" count="15" type="stmt"/>
+        <line num="23" count="15" type="stmt"/>
       </file>
     </package>
     <package name="components.PersonalCard">
@@ -330,9 +324,9 @@
       </file>
     </package>
     <package name="components.UI.MyButton">
-      <metrics statements="42" coveredstatements="42" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="46" coveredstatements="46" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="MyButton.tsx" path="/Users/vlad/Desktop/RSschool/React stage3/12312/React.Components/src/components/UI/MyButton/MyButton.tsx">
-        <metrics statements="27" coveredstatements="27" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="31" coveredstatements="31" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -360,6 +354,10 @@
         <line num="25" count="39" type="stmt"/>
         <line num="26" count="39" type="stmt"/>
         <line num="27" count="39" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
       <file name="Styles.ts" path="/Users/vlad/Desktop/RSschool/React stage3/12312/React.Components/src/components/UI/MyButton/Styles.ts">
         <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
