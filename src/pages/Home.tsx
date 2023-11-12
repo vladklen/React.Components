@@ -1,35 +1,33 @@
 /* eslint-disable no-restricted-syntax */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
 import MyInput from '../components/UI/MyInput/MyInput';
 import MyButton from '../components/UI/MyButton/MyButton';
-import { Card } from '../components/Card/Сard';
 import Pagination from '../components/UI/Pagination/Pagination';
 import SelectAmount from '../components/UI/SelectAmount';
-import { getAnime, IAnime } from '../api/StartSearch';
+import { getAnime } from '../api/StartSearch';
+import { AppContext } from '../context/Context';
+import CardList from '../components/CardList/CardList';
 
 export default function Home() {
+  const { value, setValue, data, setData } = useContext(AppContext);
   const [search, setSearch] = useSearchParams();
-  const [text, setText] = useState(localStorage.getItem('test') ?? '');
   const [totalPosts, setTotalPosts] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  const [content, setContent] = useState<IAnime[] | []>([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
-  let myValue = '';
 
   const handleInputChange = (event: { target: { value: string } }) => {
-    myValue = event.target.value;
-    localStorage.setItem('test', myValue);
+    setValue(event.target.value);
+    localStorage.setItem('test', event.target.value);
   };
 
   const handleSearchStart = () => {
-    setText(myValue);
     let params = {};
-    for (const [key, value] of search) {
-      params = { ...params, [key]: value, page: '1', search: myValue };
+    for (const [key, val] of search) {
+      params = { ...params, [key]: val, page: '1', search: value };
     }
     setSearch(params);
   };
@@ -37,11 +35,11 @@ export default function Home() {
   useEffect(() => {
     const startSearch = async () => {
       setLoading(true);
-      const data = await getAnime(search);
-      setPostsPerPage(data.pagination.items.per_page);
+      const response = await getAnime(search);
+      setData(response.data);
+      setPostsPerPage(response.pagination.items.per_page);
       setLoading(false);
-      setTotalPosts(data.pagination.items.total);
-      setContent(data.data);
+      setTotalPosts(response.pagination.items.total);
     };
 
     if (location.pathname.length === 1) {
@@ -71,19 +69,19 @@ export default function Home() {
         } else {
           limit = 1;
         }
-        for (const [key, value] of search) {
-          params = { ...params, [key]: value, limit: `${limit}` };
+        for (const [key, val] of search) {
+          params = { ...params, [key]: val, limit: `${limit}` };
         }
         setSearch(params);
       }
       startSearch();
     }
-  }, [location.pathname.length, search, setSearch]);
+  }, [location.pathname.length, search, setData, setSearch]);
 
   return (
     <div>
       <SearchWrapper>
-        <MyInput message={text} change={handleInputChange} />
+        <MyInput change={handleInputChange} />
         <MyButton click={handleSearchStart} color="blue" message="Search" />
       </SearchWrapper>
       <h2>Results:</h2>
@@ -99,13 +97,11 @@ export default function Home() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-        {content.length && !loading
-          ? content.map((el: IAnime) => (
-              <Link to={`details/${el.mal_id}`} key={el.mal_id}>
-                <Card title={el.title} image={el.images.jpg.image_url} />
-              </Link>
-            ))
-          : !loading && <h3>Not found!</h3>}
+        {data.length && !loading ? (
+          <CardList />
+        ) : (
+          !loading && <h3>Not found!</h3>
+        )}
         <Outlet />
       </ContentWrapper>
       <SelectAmount />

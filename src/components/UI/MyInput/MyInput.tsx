@@ -1,11 +1,12 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useContext } from 'react';
 import { StyledInput } from './Styles';
+import { AppContext } from '../../../context/Context';
 
 interface IInputProps {
-  message: string;
   change: ChangeEventHandler<HTMLInputElement>;
 }
 
-export default function MyInput({ message, change }: IInputProps) {
-  return <StyledInput type="text" defaultValue={message} onChange={change} />;
+export default function MyInput({ change }: IInputProps) {
+  const { value } = useContext(AppContext);
+  return <StyledInput type="text" defaultValue={value} onChange={change} />;
 }
