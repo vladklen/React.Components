@@ -24,7 +24,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: latest,
+    ecmaVersion: 'latest',
     sourceType: 'module',
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -48,5 +48,6 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/prefer-stateless-function': ['warn', { ignorePureComponents: true }],
     'no-console': ['error', { allow: ['warn', 'error'] }],
+    'react/jsx-props-no-spreading': 'off',
   },
 };

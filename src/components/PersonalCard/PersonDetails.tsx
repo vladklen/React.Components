@@ -50,14 +50,14 @@ export default function PersonDetails() {
                 click={() => navigate(-1)}
                 color="blue"
                 message="Close"
-                dataTest={`test-CloseButton`}
+                dataTest="test-CloseButton"
               />
             </StyledPersonalCardContent>
           </>
         ) : (
-          <div data-testid={`test-loader`}>
+          <div data-testid="test-loader">
             <ColorRing
-              data-testid={`test-cardDetails-loader`}
+              data-testid="test-cardDetails-loader"
               visible
               height="80"
               width="80"

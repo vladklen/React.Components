@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { act, fireEvent, render } from '@testing-library/react';
-import Home from '../../../src/pages/Home';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import Home from '../../../src/pages/Home';
 import { data, pagination } from '../../mocks/AnimeRespone';
 import AnimeContextProvider from '../../../src/context/Context';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
@@ -21,7 +21,7 @@ vi.mock('../../../src/api/StartSearch', () => {
   };
 });
 
-describe('Test CardList component', () => {
+describe('Test PersonalCard component', () => {
   test('Check that a loading indicator is displayed while fetching data;', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>

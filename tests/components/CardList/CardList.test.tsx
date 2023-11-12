@@ -1,12 +1,14 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render } from '@testing-library/react';
-import CardList from '../../../src/components/CardList/CardList';
 import { MemoryRouter } from 'react-router-dom';
 import { useContext } from 'react';
-import { TEXT_CONTENT } from '../../../src/components/CardList/CardList';
+import CardList, {
+  TEXT_CONTENT,
+} from '../../../src/components/CardList/CardList';
 import { data } from '../../mocks/AnimeRespone';
 
 vi.mock('react', async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const actual = await vi.importActual<any>('react');
   return {
     ...actual,

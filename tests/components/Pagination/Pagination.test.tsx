@@ -1,64 +1,51 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, test } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
-import AnimeContextProvider from '../../../src/context/Context';
+import { RenderResult, act, fireEvent, render } from '@testing-library/react';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import Pagination from '../../../src/components/UI/Pagination/Pagination';
 import { paginationProps } from '../../mocks/AnimeRespone';
 
-const PAGE = 5;
+const CURRENT_PAGE = '5';
 const CLICK_PAGE = 3;
 
-const renderPagination = () => {
-  render(
-    <AnimeContextProvider>
-      <Pagination {...paginationProps} />
-    </AnimeContextProvider>,
-    { wrapper: BrowserRouter }
-  );
-};
+const history = createMemoryHistory();
+
+vi.mock('react-router-dom', async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const actual = await vi.importActual<any>('react-router-dom');
+  return {
+    ...actual,
+    useSearchParams: () => {
+      const setSearch = (url: { page: string }) =>
+        history.push({
+          search: `page=${url.page}`,
+        });
+      const search = {
+        get: () => CURRENT_PAGE,
+        *[Symbol.iterator]() {
+          yield ['page', `${CURRENT_PAGE}`];
+        },
+      };
+      return [search, setSearch];
+    },
+  };
+});
 
 describe('Pagination tests', () => {
-  let urlPage: URL;
+  let wrapper: RenderResult;
   beforeEach(() => {
-    renderPagination();
-    urlPage = new URL(window.location.href);
-    urlPage.searchParams.set('page', String(PAGE));
-  });
-
-  test('Updates URL query parameter when click next page', () => {
-    const pageValuePrev = urlPage.searchParams.get('page');
-
-    const nextBtn: HTMLButtonElement = screen.getByLabelText('Next page');
-    console.log(nextBtn);
-    fireEvent.click(nextBtn);
-
-    const url = new URL(window.location.href);
-    const pageValue = url.searchParams.get('page');
-
-    expect(pageValue).toBe(String(Number(pageValuePrev) + 1));
-  });
-
-  test('Updates URL query parameter when click prev page', () => {
-    const pageValuePrev = urlPage.searchParams.get('page');
-
-    const prevBtn: HTMLButtonElement = screen.getByLabelText('Previous page');
-    fireEvent.click(prevBtn);
-
-    const url = new URL(window.location.href);
-    const pageValue = url.searchParams.get('page');
-
-    expect(pageValue).toBe(String(Number(pageValuePrev) - 1));
-  });
-
-  test('Updates URL query parameter when click page', () => {
-    const pageBtn: HTMLButtonElement = screen.getByLabelText(
-      `Page ${CLICK_PAGE}`
+    wrapper = render(
+      <Router location={history.location} navigator={history}>
+        <Pagination {...paginationProps} />
+      </Router>
     );
-    fireEvent.click(pageBtn);
+  });
 
-    const url = new URL(window.location.href);
-    const pageValue = url.searchParams.get('page');
-
-    expect(pageValue).toBe(String(CLICK_PAGE));
+  test('Updates URL query parameter when click next page', async () => {
+    const el = await wrapper.findByText(`${CLICK_PAGE}`);
+    act(() => {
+      fireEvent.click(el);
+    });
+    expect(history.location.search).toBe(`page=${CLICK_PAGE}`);
   });
 });

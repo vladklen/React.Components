@@ -25,3 +25,7 @@ export default function MyButton({
     </StyledButton>
   );
 }
+
+MyButton.defaultProps = {
+  dataTest: 'testButton',
+};

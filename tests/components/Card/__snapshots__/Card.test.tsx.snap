@@ -1,5 +1,24 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Test Card component > Ensure that the card component renders the relevant card data; 1`] = `
+<a
+  data-testid="test1"
+  href="/details/1"
+>
+  <div
+    class="sc-iCoHzw FnKDP"
+  >
+    <h3>
+      Test title #1
+    </h3>
+    <div
+      class="sc-fujznN epBsNf"
+      style="background-image: url(url:page1);"
+    />
+  </div>
+</a>
+`;
+
 exports[`Test CardList component > Ensure that the card component renders the relevant card data; 1`] = `
 <a
   data-testid="test1"
