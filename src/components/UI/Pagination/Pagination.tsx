@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { StyledPaginate } from './Styles';
 
-interface IPaginationProps {
+export interface IPaginationProps {
   postsPerPage: number;
   totalPosts: number;
   loading: boolean;

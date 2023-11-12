@@ -31,7 +31,7 @@ export default function PersonDetails() {
   }, [id]);
 
   return (
-    <ModalWrapper onClick={() => navigate(-1)}>
+    <ModalWrapper onClick={() => navigate(-1)} data-testid={`cardDetails${id}`}>
       <StyledPersonalCard>
         {content && !loading ? (
           <>
@@ -50,19 +50,23 @@ export default function PersonDetails() {
                 click={() => navigate(-1)}
                 color="blue"
                 message="Close"
+                dataTest={`test-CloseButton`}
               />
             </StyledPersonalCardContent>
           </>
         ) : (
-          <ColorRing
-            visible
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-          />
+          <div data-testid={`test-loader`}>
+            <ColorRing
+              data-testid={`test-cardDetails-loader`}
+              visible
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />
+          </div>
         )}
       </StyledPersonalCard>
     </ModalWrapper>

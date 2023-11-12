@@ -6,42 +6,48 @@ import { data, pagination } from '../../mocks/AnimeRespone';
 import AnimeContextProvider from '../../../src/context/Context';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';
-import { getAnimeById } from '../../../src/api/StartSearch';
 
 vi.mock('../../../src/api/StartSearch', () => {
   return {
     getAnime: vi.fn(() => Promise.resolve({ data, pagination })),
-    getAnimeById: vi.fn(() => Promise.resolve({ data: data[0] })),
+    getAnimeById: vi.fn(async () => {
+      await new Promise((res) => {
+        setTimeout(() => {
+          res('');
+        }, 500);
+      });
+      return Promise.resolve({ data: data[0] });
+    }),
   };
 });
 
 describe('Test CardList component', () => {
-  test('Test Home component render', async () => {
+  test('Check that a loading indicator is displayed while fetching data;', async () => {
     const wrapper = render(
-      <AnimeContextProvider>
-        <MemoryRouter>
-          <Home />
-        </MemoryRouter>
-      </AnimeContextProvider>
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AnimeContextProvider>
+                <Home />
+              </AnimeContextProvider>
+            }
+          >
+            <Route path="details/:id" element={<PersonDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </MemoryRouter>
     );
 
-    const items = await wrapper.findAllByRole('link');
+    const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
 
-    expect(items.length).toBe(3);
-  });
+    fireEvent.click(linkElement);
 
-  test('Ensure that the card component renders the relevant card data;', async () => {
-    const wrapper = render(
-      <AnimeContextProvider>
-        <MemoryRouter>
-          <Home />
-        </MemoryRouter>
-      </AnimeContextProvider>
-    );
+    const loader = await wrapper.findByTestId(`test-loader`);
 
-    const items = await wrapper.findAllByRole('link');
-
-    expect(items[0]).toMatchSnapshot();
+    expect(loader).toBeInTheDocument();
   });
 
   test('Validate that clicking on a card opens a detailed card component', async () => {
@@ -73,7 +79,7 @@ describe('Test CardList component', () => {
     ).toBeTruthy();
   });
 
-  test('Check that clicking triggers an additional API call to fetch detailed information', async () => {
+  test('Ensure that clicking the close button hides the component', async () => {
     const wrapper = render(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
@@ -97,6 +103,12 @@ describe('Test CardList component', () => {
       fireEvent.click(linkElement);
     });
 
-    expect(getAnimeById).toBeCalled();
+    const closeButton = await wrapper.findByTestId(`test-CloseButton`);
+
+    act(() => {
+      fireEvent.click(closeButton);
+    });
+
+    expect(wrapper.queryByTestId(`cardDetails${data[0].mal_id}`)).toBeFalsy();
   });
 });

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Card } from '../Card/Сard';
 import { AppContext } from '../../context/Context';

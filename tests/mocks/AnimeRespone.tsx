@@ -38,3 +38,9 @@ export const pagination = {
     total: 100,
   },
 };
+
+export const paginationProps = {
+  postsPerPage: 10,
+  totalPosts: 100,
+  loading: false,
+};

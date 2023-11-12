@@ -9,7 +9,7 @@ interface CardProps {
 
 function Card({ title, image, id }: CardProps) {
   return (
-    <Link to={`details/${id}`}>
+    <Link to={`details/${id}`} data-testid={`test${id}`}>
       <StyledCard>
         <h3>{title}</h3>
         <StyledCardPreview
