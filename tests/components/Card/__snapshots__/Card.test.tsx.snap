@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test CardList component > Ensure that the card component renders the relevant card data; 1`] = `
+<div>
+  <a
+    href="/details/1231231"
+  >
+    <div
+      class="sc-eCAqax fHGSqI"
+    >
+      <h3>
+        Test title
+      </h3>
+      <div
+        class="sc-jSFipO dlvPsJ"
+        style="background-image: url(https://cdn.myanimelist.net/images/anime/1969/112604.jpg);"
+      />
+    </div>
+  </a>
+</div>
+`;

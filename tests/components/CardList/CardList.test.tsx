@@ -1,7 +1,9 @@
-import { SpyInstance, beforeEach, describe, expect, test, vi } from 'vitest';
-import { RenderResult, render } from '@testing-library/react';
+import { describe, expect, test, vi } from 'vitest';
+import { render } from '@testing-library/react';
 import CardList from '../../../src/components/CardList/CardList';
+import { MemoryRouter } from 'react-router-dom';
 import React, { useContext } from 'react';
+import { TEXT_CONTENT } from '../../../src/components/CardList/CardList';
 
 const data = [
   {
@@ -36,24 +38,34 @@ const data = [
   },
 ];
 
-const TestContext = React.createContext({});
+vi.mock('react', async () => {
+  const actual = await vi.importActual<any>('react');
+  return {
+    ...actual,
+    useContext: vi.fn(() => ({ data })),
+  };
+});
 
 describe('Test CardList component', () => {
-  // let context: SpyInstance<[context: React.Context<unknown>], unknown>;
-  // let wrapper: RenderResult;
-
-  // beforeEach(() => {
-  //   context = vi.spyOn(React, 'useContext');
-  //   context.mockReturnValue({ data });
-  //   wrapper = render(<CardList />);
-  // });
-  test('Verify that the component renders the specified number of cards', async () => {
+  test('Verify that the component renders the specified number of cards', () => {
+    vi.mocked(useContext).mockReturnValueOnce({ data });
     const wrapper = render(
-      <TestContext.Provider value={data}>
+      <MemoryRouter>
         <CardList />
-      </TestContext.Provider>
+      </MemoryRouter>
     );
-    const items = await wrapper.findAllByRole('link');
+    const items = wrapper.queryAllByRole('link');
     expect(items.length).toBe(data.length);
+  });
+
+  test('Verify that the component renders the specified number of cards', () => {
+    vi.mocked(useContext).mockReturnValueOnce({ data: [] });
+    const wrapper = render(
+      <MemoryRouter>
+        <CardList />
+      </MemoryRouter>
+    );
+    const item = wrapper.queryByText(TEXT_CONTENT.ERROR);
+    expect(item).not.toBeFalsy();
   });
 });

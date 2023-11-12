@@ -12,7 +12,7 @@ import { AppContext } from '../context/Context';
 import CardList from '../components/CardList/CardList';
 
 export default function Home() {
-  const { value, setValue, data, setData } = useContext(AppContext);
+  const { value, setValue, setData } = useContext(AppContext);
   const [search, setSearch] = useSearchParams();
   const [totalPosts, setTotalPosts] = useState(0);
   const [postsPerPage, setPostsPerPage] = useState(10);

@@ -1,20 +1,24 @@
+import { Link } from 'react-router-dom';
 import { StyledCard, StyledCardPreview } from './Styles';
 
 interface CardProps {
   title: string;
   image: string;
+  id: number;
 }
 
-function Card({ title, image }: CardProps) {
+function Card({ title, image, id }: CardProps) {
   return (
-    <StyledCard>
-      <h3>{title}</h3>
-      <StyledCardPreview
-        style={{
-          backgroundImage: `url("${image}")`,
-        }}
-      />
-    </StyledCard>
+    <Link to={`details/${id}`}>
+      <StyledCard>
+        <h3>{title}</h3>
+        <StyledCardPreview
+          style={{
+            backgroundImage: `url("${image}")`,
+          }}
+        />
+      </StyledCard>
+    </Link>
   );
 }
 
