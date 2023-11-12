@@ -97,11 +97,7 @@ export default function Home() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-        {data.length && !loading ? (
-          <CardList />
-        ) : (
-          !loading && <h3>Not found!</h3>
-        )}
+        {!loading && <CardList />}
         <Outlet />
       </ContentWrapper>
       <SelectAmount />

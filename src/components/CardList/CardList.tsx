@@ -6,13 +6,18 @@ import { IAnime } from '../../api/StartSearch';
 
 export default function CardList() {
   const { data } = useContext(AppContext);
+  console.log(useContext(AppContext));
   return (
     <>
-      {data.map((el: IAnime) => (
-        <Link to={`details/${el.mal_id}`} key={el.mal_id}>
-          <Card title={el.title} image={el.images.jpg.image_url} />
-        </Link>
-      ))}
+      {data.length ? (
+        data.map((el: IAnime) => (
+          <Link to={`details/${el.mal_id}`} key={el.mal_id}>
+            <Card title={el.title} image={el.images.jpg.image_url} />
+          </Link>
+        ))
+      ) : (
+        <h3>Items Not found!</h3>
+      )}
     </>
   );
 }
