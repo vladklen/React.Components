@@ -14,31 +14,8 @@ vi.mock('../../../src/api/StartSearch', () => {
   };
 });
 
-const localStorageMock = (function () {
-  let store = {};
-
-  return {
-    getItem: function (key) {
-      return store[key] || null;
-    },
-    setItem: function (key, value) {
-      store[key] = value.toString();
-    },
-    removeItem: function (key) {
-      delete store[key];
-    },
-    clear: function () {
-      store = {};
-    },
-  };
-})();
-
-Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
-});
-
 describe('Test Search component', () => {
-  test('Validate that clicking on a card opens a detailed card component', async () => {
+  test('Verify that clicking the Search button saves the entered value to the local storage', async () => {
     const wrapper = render(
       <MemoryRouter>
         <Routes>
@@ -68,8 +45,9 @@ describe('Test Search component', () => {
     expect(localStorageData).toBe('test value');
   });
 
-  test('Validate that clicking on a card opens a detailed card component', async () => {
+  test('Check that the component retrieves the value from the local storage upon mounting', async () => {
     localStorage.setItem('test', 'test value');
+
     const wrapper = render(
       <MemoryRouter>
         <Routes>
@@ -88,8 +66,8 @@ describe('Test Search component', () => {
       </MemoryRouter>
     );
 
-    const input = await wrapper.findByRole('textbox');
+    const input = (await wrapper.findByRole('textbox')) as HTMLInputElement;
 
-    expect(input).toHaveTextContent('test value');
+    expect(input.value).toBe('test value');
   });
 });
