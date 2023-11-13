@@ -1,14 +1,12 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render } from '@testing-library/react';
-import { Route, Router, Routes } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+
 import Home from '../../../src/pages/Home';
 import { data, pagination } from '../../mocks/AnimeRespone';
 import AnimeContextProvider from '../../../src/context/Context';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';
-
-const history = createMemoryHistory();
 
 vi.mock('../../../src/api/StartSearch', () => {
   return {
@@ -20,7 +18,7 @@ vi.mock('../../../src/api/StartSearch', () => {
 describe('Test 404 page', () => {
   test('Ensure that the 404 page is displayed when navigating to an invalid route', async () => {
     const wrapper = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter initialEntries={['/error']}>
         <Routes>
           <Route
             path="/"
@@ -34,9 +32,8 @@ describe('Test 404 page', () => {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
+      </MemoryRouter>
     );
-    history.push('/32423423');
 
     expect(await wrapper.findByText(`Page not found!`)).toBeTruthy();
   });
