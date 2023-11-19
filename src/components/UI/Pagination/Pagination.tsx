@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,17 +26,12 @@ export default function Pagination(props: IPaginationProps) {
       setTotalPosts(data.pagination.items.total);
       dispatch(changePostsAmount(data.pagination.items.per_page));
     }
-    setActivePage(Number(search.get('page')) - 1);
-  }, [data, dispatch, search]);
+  }, [data, dispatch, search, setSearch, value]);
 
   const handlePageClick = (event: { selected: number }) => {
     const page = event.selected;
-    let params = {};
-    for (const [key, val] of search) {
-      params = { ...params, [key]: val, page: page + 1 };
-    }
     setActivePage(page);
-    setSearch(params);
+    setSearch({ ...value, page: `${page + 1}` });
   };
 
   if (isLoading) {

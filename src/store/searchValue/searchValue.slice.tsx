@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface IValue {

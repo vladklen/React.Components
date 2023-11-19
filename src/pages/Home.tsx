@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
@@ -21,7 +20,7 @@ export default function Home() {
   const location = useLocation();
   const [inputSearch, setInputSearch] = useState(value.search);
 
-  const { isLoading } = useGetCardListQuery(value);
+  const { isFetching } = useGetCardListQuery(value);
 
   const handleInputChange = (event: { target: { value: string } }) => {
     localStorage.setItem('test', event.target.value);
@@ -30,11 +29,9 @@ export default function Home() {
 
   const handleSearchStart = () => {
     setSearch({ ...value, search: inputSearch });
-    // dispatch(changeSearchValue({ ...value, search: inputSearch }));
   };
 
   useEffect(() => {
-    console.log(12312);
     if (!location.pathname.includes('details')) {
       dispatch(
         changeSearchValue({
@@ -61,7 +58,7 @@ export default function Home() {
       </SearchWrapper>
       <h2>Results:</h2>
       <ContentWrapper>
-        {isLoading && (
+        {isFetching && (
           <ColorRing
             visible
             height="80"
@@ -72,7 +69,7 @@ export default function Home() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-        {!isLoading && <CardList />}
+        {!isFetching && <CardList />}
         <Outlet />
       </ContentWrapper>
       <SelectAmount />

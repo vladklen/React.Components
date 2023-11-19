@@ -1,4 +1,4 @@
-import { redirect, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import { ModalWrapper } from '../UI/Styles';
@@ -20,7 +20,9 @@ export default function PersonDetails() {
   return (
     <ModalWrapper
       onClick={() => {
-        navigate(-1);
+        navigate(
+          `/?search=${value.search}&page=${value.page}&limit=${value.limit}`
+        );
       }}
       data-testid={`cardDetails${id}`}
     >
@@ -40,7 +42,9 @@ export default function PersonDetails() {
               <p>Score: {data.score}</p>
               <MyButton
                 click={() => {
-                  navigate(-1);
+                  navigate(
+                    `/?search=${value.search}&page=${value.page}&limit=${value.limit}`
+                  );
                 }}
                 color="blue"
                 message="Close"

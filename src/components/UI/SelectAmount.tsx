@@ -1,9 +1,9 @@
-/* eslint-disable no-restricted-syntax */
 import { SetStateAction } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyledSelect } from './Styles';
 import { changePostsAmount } from '../../store/postsPerPage/postsPerPage.slice';
+import { RootState } from '../../store/store';
 
 const OPTIONS = [
   { value: 1, label: '1' },
@@ -13,18 +13,16 @@ const OPTIONS = [
 
 export default function SelectAmount() {
   const [search, setSearch] = useSearchParams();
+  const { value } = useSelector((state: RootState) => state.value);
   const dispatch = useDispatch();
 
   const handleChange = (event: {
     target: { value: SetStateAction<string> };
   }) => {
-    let params = {};
-    for (const [key, value] of search) {
-      params = { ...params, [key]: value, limit: event.target.value };
-    }
-    dispatch(changePostsAmount(Number(event.target.value)));
+    const limit = event.target.value;
+    dispatch(changePostsAmount(Number(limit)));
 
-    setSearch(params);
+    setSearch({ ...value, limit: `${limit}` });
   };
 
   return (
