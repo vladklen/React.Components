@@ -1,5 +1,6 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { redirect, useNavigate, useParams } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
+import { useSelector } from 'react-redux';
 import { ModalWrapper } from '../UI/Styles';
 import MyButton from '../UI/MyButton/MyButton';
 import {
@@ -8,14 +9,21 @@ import {
   StyledCardImage,
 } from './Styles';
 import { useGetCardByIdQuery } from '../../store/animeApi';
+import { RootState } from '../../store/store';
 
 export default function PersonDetails() {
-  const navigate = useNavigate();
+  const { value } = useSelector((state: RootState) => state.value);
   const { id } = useParams();
   const { data, isLoading } = useGetCardByIdQuery(`${id}`);
+  const navigate = useNavigate();
 
   return (
-    <ModalWrapper onClick={() => navigate(-1)} data-testid={`cardDetails${id}`}>
+    <ModalWrapper
+      onClick={() => {
+        navigate(-1);
+      }}
+      data-testid={`cardDetails${id}`}
+    >
       <StyledPersonalCard>
         {data && !isLoading ? (
           <>
@@ -31,7 +39,9 @@ export default function PersonDetails() {
               <p>Status:{data.status}</p>
               <p>Score: {data.score}</p>
               <MyButton
-                click={() => navigate(-1)}
+                click={() => {
+                  navigate(-1);
+                }}
                 color="blue"
                 message="Close"
                 dataTest="test-CloseButton"
