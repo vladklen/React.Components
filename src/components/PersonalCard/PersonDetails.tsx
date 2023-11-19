@@ -21,15 +21,15 @@ export default function PersonDetails() {
           <>
             <StyledCardImage
               style={{
-                backgroundImage: `url("${data.data.images.jpg.image_url}")`,
+                backgroundImage: `url("${data.images.jpg.image_url}")`,
               }}
             />
             <StyledPersonalCardContent>
-              <h3>Title: {data.data.title}</h3>
-              <h3>{data.data.title_japanese}</h3>
-              <p>Rating:{data.data.rating}</p>
-              <p>Status:{data.data.status}</p>
-              <p>Score: {data.data.score}</p>
+              <h3>Title: {data.title}</h3>
+              <h3>{data.title_japanese}</h3>
+              <p>Rating:{data.rating}</p>
+              <p>Status:{data.status}</p>
+              <p>Score: {data.score}</p>
               <MyButton
                 click={() => navigate(-1)}
                 color="blue"

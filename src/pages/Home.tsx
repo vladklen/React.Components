@@ -21,6 +21,7 @@ export default function Home() {
   const [search, setSearch] = useSearchParams();
   const [totalPosts, setTotalPosts] = useState(0);
   const location = useLocation();
+  const [skip, setSkip] = useState(false);
 
   const { data, isLoading } = useGetCardListQuery({
     searchQuery: search.get('search') as string,
@@ -45,6 +46,11 @@ export default function Home() {
     if (data) {
       setTotalPosts(data.pagination.items.total);
       dispatch(changePostsAmount(data.pagination.items.per_page));
+    }
+    if (location.pathname.includes('details')) {
+      setSkip(true);
+    } else {
+      setSkip(false);
     }
     if (location.pathname.length === 1) {
       if (
@@ -100,7 +106,7 @@ export default function Home() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-        {!isLoading && <CardList />}
+        {!isLoading && <CardList skip={skip} />}
         <Outlet />
       </ContentWrapper>
       <SelectAmount />

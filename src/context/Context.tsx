@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useMemo, useState } from 'react';
-import { IAnime } from '../api/StartSearch';
+import { IAnime } from '../types/types';
 
 type ContextType = {
   value: string;
