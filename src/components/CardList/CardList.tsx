@@ -1,18 +1,24 @@
-import { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Card } from '../Card/Сard';
-import { AppContext } from '../../context/Context';
 import { IAnime } from '../../api/StartSearch';
+import { useGetCardListQuery } from '../../store/animeApi';
 
 export const TEXT_CONTENT = {
   ERROR: 'Items Not Found',
 };
 
 export default function CardList() {
-  const { data } = useContext(AppContext);
-  if (!data.length) {
+  const [search] = useSearchParams();
+  const { data } = useGetCardListQuery({
+    searchQuery: search.get('search') as string,
+    pageQuery: search.get('page') as string,
+    perPageQuery: search.get('limit') as string,
+  });
+
+  if (!data?.data.length) {
     return <h3>{TEXT_CONTENT.ERROR}</h3>;
   }
-  return data.map((el: IAnime) => (
+  return data.data.map((el: IAnime) => (
     <Card
       title={el.title}
       image={el.images.jpg.image_url}

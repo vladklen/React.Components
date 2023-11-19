@@ -1,51 +1,35 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import { ModalWrapper } from '../UI/Styles';
-import { IAnime, getAnimeById } from '../../api/StartSearch';
 import MyButton from '../UI/MyButton/MyButton';
 import {
   StyledPersonalCard,
   StyledPersonalCardContent,
   StyledCardImage,
 } from './Styles';
+import { useGetCardByIdQuery } from '../../store/animeApi';
 
 export default function PersonDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
-  const [content, setContent] = useState<IAnime | null>(null);
-
-  useEffect(() => {
-    if (id) {
-      const startSearch = async () => {
-        setLoading(true);
-        const data = await getAnimeById(id);
-        setLoading(false);
-        if (data) {
-          setContent(data.data);
-        }
-      };
-      startSearch();
-    }
-  }, [id]);
+  const { data, isLoading } = useGetCardByIdQuery(`${id}`);
 
   return (
     <ModalWrapper onClick={() => navigate(-1)} data-testid={`cardDetails${id}`}>
       <StyledPersonalCard>
-        {content && !loading ? (
+        {data && !isLoading ? (
           <>
             <StyledCardImage
               style={{
-                backgroundImage: `url("${content.images.jpg.image_url}")`,
+                backgroundImage: `url("${data.data.images.jpg.image_url}")`,
               }}
             />
             <StyledPersonalCardContent>
-              <h3>Title: {content.title}</h3>
-              <h3>{content.title_japanese}</h3>
-              <p>Rating:{content.rating}</p>
-              <p>Status:{content.status}</p>
-              <p>Score: {content.score}</p>
+              <h3>Title: {data.data.title}</h3>
+              <h3>{data.data.title_japanese}</h3>
+              <p>Rating:{data.data.rating}</p>
+              <p>Status:{data.data.status}</p>
+              <p>Score: {data.data.score}</p>
               <MyButton
                 click={() => navigate(-1)}
                 color="blue"

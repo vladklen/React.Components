@@ -49,5 +49,6 @@ module.exports = {
     'react/prefer-stateless-function': ['warn', { ignorePureComponents: true }],
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'react/jsx-props-no-spreading': 'off',
+    'no-param-reassign': ['error', { props: false }],
   },
 };

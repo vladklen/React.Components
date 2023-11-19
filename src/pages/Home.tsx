@@ -1,26 +1,35 @@
 /* eslint-disable no-restricted-syntax */
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
 import MyInput from '../components/UI/MyInput/MyInput';
 import MyButton from '../components/UI/MyButton/MyButton';
 import Pagination from '../components/UI/Pagination/Pagination';
 import SelectAmount from '../components/UI/SelectAmount';
-import { getAnime } from '../api/StartSearch';
-import { AppContext } from '../context/Context';
 import CardList from '../components/CardList/CardList';
+import { RootState } from '../store/store';
+import { changeSearchValue } from '../store/searchValue/searchValue.slice';
+import { changePostsAmount } from '../store/postsPerPage/postsPerPage.slice';
+import { useGetCardListQuery } from '../store/animeApi';
 
 export default function Home() {
-  const { value, setValue, setData } = useContext(AppContext);
+  const { value } = useSelector((state: RootState) => state.value);
+  const postPerPage = useSelector((state: RootState) => state.postsPerPage);
+  const dispatch = useDispatch();
   const [search, setSearch] = useSearchParams();
   const [totalPosts, setTotalPosts] = useState(0);
-  const [postsPerPage, setPostsPerPage] = useState(10);
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
+  const { data, isLoading } = useGetCardListQuery({
+    searchQuery: search.get('search') as string,
+    pageQuery: search.get('page') as string,
+    perPageQuery: search.get('limit') as string,
+  });
+
   const handleInputChange = (event: { target: { value: string } }) => {
-    setValue(event.target.value);
+    dispatch(changeSearchValue(event.target.value));
     localStorage.setItem('test', event.target.value);
   };
 
@@ -33,15 +42,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const startSearch = async () => {
-      setLoading(true);
-      const response = await getAnime(search);
-      setData(response.data);
-      setPostsPerPage(response.pagination.items.per_page);
-      setLoading(false);
-      setTotalPosts(response.pagination.items.total);
-    };
-
+    if (data) {
+      setTotalPosts(data.pagination.items.total);
+      dispatch(changePostsAmount(data.pagination.items.per_page));
+    }
     if (location.pathname.length === 1) {
       if (
         !search.get('search') &&
@@ -74,9 +78,8 @@ export default function Home() {
         }
         setSearch(params);
       }
-      startSearch();
     }
-  }, [location.pathname.length, search, setData, setSearch]);
+  }, [data, dispatch, location.pathname.length, search, setSearch]);
 
   return (
     <div>
@@ -86,7 +89,7 @@ export default function Home() {
       </SearchWrapper>
       <h2>Results:</h2>
       <ContentWrapper>
-        {loading && (
+        {isLoading && (
           <ColorRing
             visible
             height="80"
@@ -97,14 +100,14 @@ export default function Home() {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-        {!loading && <CardList />}
+        {!isLoading && <CardList />}
         <Outlet />
       </ContentWrapper>
       <SelectAmount />
       <Pagination
-        postsPerPage={postsPerPage}
+        postsPerPage={postPerPage.value}
         totalPosts={totalPosts}
-        loading={loading}
+        loading={isLoading}
       />
     </div>
   );

@@ -1,12 +1,13 @@
-import { ChangeEventHandler, useContext } from 'react';
+import { ChangeEventHandler } from 'react';
+import { useSelector } from 'react-redux';
 import { StyledInput } from './Styles';
-import { AppContext } from '../../../context/Context';
+import { RootState } from '../../../store/store';
 
 interface IInputProps {
   change: ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function MyInput({ change }: IInputProps) {
-  const { value } = useContext(AppContext);
+  const { value } = useSelector((state: RootState) => state.value);
   return <StyledInput type="text" defaultValue={value} onChange={change} />;
 }
