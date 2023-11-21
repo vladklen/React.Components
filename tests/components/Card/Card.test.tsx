@@ -2,18 +2,10 @@ import { describe, expect, test, vi } from 'vitest';
 import { act, fireEvent, render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Home from '../../../src/pages/Home';
-import { data, pagination } from '../../mocks/AnimeRespone';
+import { data, mockState, pagination } from '../../mocks/AnimeRespone';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';
 import { useGetCardByIdQuery } from '../../../src/store/animeApi';
-
-const mockState = {
-  value: {
-    search: 'test',
-    page: '1',
-    limit: '10',
-  },
-};
 
 vi.mock('react-redux', () => ({
   useDispatch: () => vi.fn(),

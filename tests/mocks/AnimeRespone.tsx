@@ -1,4 +1,6 @@
-export const data = [
+import { IAnime, IDataResponse } from '../../src/types/types';
+
+export const data: IAnime[] = [
   {
     mal_id: 1,
     title: 'Test title #1',
@@ -39,8 +41,27 @@ export const pagination = {
   },
 };
 
+export const response: IDataResponse = {
+  data,
+  pagination: {
+    items: {
+      count: 3,
+      per_page: 3,
+      total: 3,
+    },
+  },
+};
+
 export const paginationProps = {
   postsPerPage: 10,
   totalPosts: 100,
   loading: false,
+};
+
+export const mockState = {
+  value: {
+    search: 'test',
+    page: '1',
+    limit: '10',
+  },
 };

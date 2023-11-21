@@ -1,114 +1,88 @@
-// import { describe, expect, test, vi } from 'vitest';
-// import { act, fireEvent, render } from '@testing-library/react';
-// import { MemoryRouter, Route, Routes } from 'react-router-dom';
-// import Home from '../../../src/pages/Home';
-// import { data, pagination } from '../../mocks/AnimeRespone';
-// import AnimeContextProvider from '../../../src/context/Context';
-// import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-// import NotFound from '../../../src/pages/NotFound';
+import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
+import { act, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { setupServer } from 'msw/node';
+import Home from '../../../src/pages/Home';
+import { data } from '../../mocks/AnimeRespone';
+import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
+import NotFound from '../../../src/pages/NotFound';
+import { renderWithProviders } from '../../utils/test-utils';
+import { handlerWithData } from '../../mocks/node';
 
-// vi.mock('../../../src/api/StartSearch', () => {
-//   return {
-//     getAnime: vi.fn(() => Promise.resolve({ data, pagination })),
-//     getAnimeById: vi.fn(async () => {
-//       await new Promise((res) => {
-//         setTimeout(() => {
-//           res('');
-//         }, 500);
-//       });
-//       return Promise.resolve({ data: data[0] });
-//     }),
-//   };
-// });
+const server = setupServer(...handlerWithData);
 
-// describe('Test PersonalCard component', () => {
-//   test('Check that a loading indicator is displayed while fetching data;', async () => {
-//     const wrapper = render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Routes>
-//           <Route
-//             path="/"
-//             element={
-//               <AnimeContextProvider>
-//                 <Home />
-//               </AnimeContextProvider>
-//             }
-//           >
-//             <Route path="details/:id" element={<PersonDetails />} />
-//           </Route>
-//           <Route path="*" element={<NotFound />} />
-//         </Routes>
-//       </MemoryRouter>
-//     );
+describe('Test PersonalCard component', () => {
+  beforeAll(async () => {
+    server.listen();
+  });
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+  test('Check that a loading indicator is displayed while fetching data;', async () => {
+    const wrapper = renderWithProviders(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="details/:id" element={<PersonDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </MemoryRouter>
+    );
 
-//     const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
+    const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
 
-//     fireEvent.click(linkElement);
+    fireEvent.click(linkElement);
 
-//     const loader = await wrapper.findByTestId(`test-loader`);
+    const loader = await wrapper.findByTestId(`test-loader`);
 
-//     expect(loader).toBeInTheDocument();
-//   });
+    expect(loader).toBeInTheDocument();
+  });
 
-//   test('Validate that clicking on a card opens a detailed card component', async () => {
-//     const wrapper = render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Routes>
-//           <Route
-//             path="/"
-//             element={
-//               <AnimeContextProvider>
-//                 <Home />
-//               </AnimeContextProvider>
-//             }
-//           >
-//             <Route path="details/:id" element={<PersonDetails />} />
-//           </Route>
-//           <Route path="*" element={<NotFound />} />
-//         </Routes>
-//       </MemoryRouter>
-//     );
-//     const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
+  test('Validate that clicking on a card opens a detailed card component', async () => {
+    const wrapper = renderWithProviders(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="details/:id" element={<PersonDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
 
-//     act(() => {
-//       fireEvent.click(linkElement);
-//     });
+    act(() => {
+      fireEvent.click(linkElement);
+    });
 
-//     expect(
-//       await wrapper.findByTestId(`cardDetails${data[0].mal_id}`)
-//     ).toBeTruthy();
-//   });
+    expect(
+      await wrapper.findByTestId(`cardDetails${data[0].mal_id}`)
+    ).toBeTruthy();
+  });
 
-//   test('Ensure that clicking the close button hides the component', async () => {
-//     const wrapper = render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Routes>
-//           <Route
-//             path="/"
-//             element={
-//               <AnimeContextProvider>
-//                 <Home />
-//               </AnimeContextProvider>
-//             }
-//           >
-//             <Route path="details/:id" element={<PersonDetails />} />
-//           </Route>
-//           <Route path="*" element={<NotFound />} />
-//         </Routes>
-//       </MemoryRouter>
-//     );
-//     const linkElement = await wrapper.findByTestId(`test${data[0].mal_id}`);
+  test('Ensure that clicking the close button hides the component', async () => {
+    const wrapper = renderWithProviders(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="details/:id" element={<PersonDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const card = await wrapper.findByTestId(`test${data[0].mal_id}`);
 
-//     act(() => {
-//       fireEvent.click(linkElement);
-//     });
+    act(() => {
+      fireEvent.click(card);
+    });
 
-//     const closeButton = await wrapper.findByTestId(`test-CloseButton`);
+    const closeButton = await wrapper.findByTestId(`test-CloseButton`);
 
-//     act(() => {
-//       fireEvent.click(closeButton);
-//     });
+    act(() => {
+      fireEvent.click(closeButton);
+    });
 
-//     expect(wrapper.queryByTestId(`cardDetails${data[0].mal_id}`)).toBeFalsy();
-//   });
-// });
+    expect(wrapper.queryByTestId(`cardDetails${data[0].mal_id}`)).toBeFalsy();
+  });
+});

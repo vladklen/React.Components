@@ -1,14 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import searchReducer from './searchValue/searchValue.slice';
 import postsReducer from './postsPerPage/postsPerPage.slice';
 import { animeApi } from './animeApi';
 
+export const rootReducer = combineReducers({
+  value: searchReducer,
+  postsPerPage: postsReducer,
+  [animeApi.reducerPath]: animeApi.reducer,
+});
+
 const store = configureStore({
-  reducer: {
-    value: searchReducer,
-    postsPerPage: postsReducer,
-    [animeApi.reducerPath]: animeApi.reducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(animeApi.middleware),
   devTools: true,

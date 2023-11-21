@@ -1,9 +1,10 @@
-import { RenderResult, act, fireEvent, render } from '@testing-library/react';
+import { RenderResult, act, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Pagination from '../../../src/components/UI/Pagination/Pagination';
 import { paginationProps } from '../../mocks/AnimeRespone';
+import { renderWithProviders } from '../../utils/test-utils';
 
 const CURRENT_PAGE = '5';
 const CLICK_PAGE = 3;
@@ -34,7 +35,7 @@ vi.mock('react-router-dom', async () => {
 describe('Pagination tests', () => {
   let wrapper: RenderResult;
   beforeEach(() => {
-    wrapper = render(
+    wrapper = renderWithProviders(
       <Router location={history.location} navigator={history}>
         <Pagination {...paginationProps} />
       </Router>
