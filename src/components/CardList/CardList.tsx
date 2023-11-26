@@ -1,21 +1,17 @@
-import { useSelector } from 'react-redux';
 import { Card } from '../Card/Сard';
-import { IAnime } from '../../types/types';
-import { useGetCardListQuery } from '../../store/animeApi';
-import { RootState } from '../../store/store';
+import { IAnime, IDataResponse } from '../../types/types';
 
 export const TEXT_CONTENT = {
   ERROR: 'Items Not Found',
 };
 
-export default function CardList() {
-  const { value } = useSelector((state: RootState) => state.value);
-  const { data } = useGetCardListQuery(value);
-
+export default function CardList(list: IDataResponse) {
+  console.log(list);
+  const { data } = list;
   if (!data) {
     return <h3>{TEXT_CONTENT.ERROR}</h3>;
   }
-  return data.data.map((el: IAnime) => (
+  return data.map((el: IAnime) => (
     <Card
       title={el.title}
       image={el.images.jpg.image_url}

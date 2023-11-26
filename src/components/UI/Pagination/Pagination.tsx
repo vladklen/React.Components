@@ -1,17 +1,38 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import { StyledPaginate } from './Styles';
-import { useGetCardListQuery } from '../../../store/animeApi';
+import { getCardList, getRunningQueriesThunk } from '../../../store/animeApi';
 import { changePostsAmount } from '../../../store/postsPerPage/postsPerPage.slice';
-import { RootState } from '../../../store/store';
+import { RootState, wrapper } from '../../../store/store';
 
 export interface IPaginationProps {
   postsPerPage: number;
 }
 
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (context) => {
+    const { page, search, limit } = context.query;
+
+    store.dispatch(
+      getCardList.initiate({
+        search: search?.toString() || '1',
+        page: page?.toString() || '',
+        limit: limit?.toString() || '10',
+      })
+    );
+
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+      props: { data },
+    };
+  });
+
 export default function Pagination(props: IPaginationProps) {
-  const [search, setSearch] = useSearchParams();
+  const router = useRouter();
+  const { query, pathname } = router;
   const { postsPerPage } = props;
   const [activePage, setActivePage] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
@@ -19,19 +40,21 @@ export default function Pagination(props: IPaginationProps) {
   const dispatch = useDispatch();
 
   const { value } = useSelector((state: RootState) => state.value);
-  const { data, isLoading } = useGetCardListQuery(value);
 
   useEffect(() => {
     if (data) {
       setTotalPosts(data.pagination.items.total);
       dispatch(changePostsAmount(data.pagination.items.per_page));
     }
-  }, [data, dispatch, search, setSearch, value]);
+  }, [data, dispatch, value]);
 
   const handlePageClick = (event: { selected: number }) => {
     const page = event.selected;
     setActivePage(page);
-    setSearch({ ...value, page: `${page + 1}` });
+    query.page = `${page + 1}`;
+    router.push({ pathname, query: { ...query } }, undefined, {
+      scroll: false,
+    });
   };
 
   if (isLoading) {

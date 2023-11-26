@@ -15,6 +15,11 @@ export interface IAnime {
   images: { jpg: { image_url: string } };
 }
 
+export interface IDataState {
+  list: IDataResponse;
+  details: IAnime;
+}
+
 export interface IPaginations {
   items: {
     count: number;

@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "test": "vitest run --coverage.all --coverage.enabled",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 100",
     "format:fix": "prettier --write .",
     "preview": "vite preview",
     "prepare": "husky install"
@@ -16,6 +17,8 @@
     "@reduxjs/toolkit": "^1.9.7",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
+    "next": "^14.0.3",
+    "next-redux-wrapper": "^8.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

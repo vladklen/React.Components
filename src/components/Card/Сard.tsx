@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { StyledCard, StyledCardPreview } from './Styles';
 
 interface CardProps {
@@ -9,7 +9,7 @@ interface CardProps {
 
 function Card({ title, image, id }: CardProps) {
   return (
-    <Link to={`details/${id}`} data-testid={`test${id}`}>
+    <Link href={`details/${id}`} data-testid={`test${id}`}>
       <StyledCard>
         <h3>{title}</h3>
         <StyledCardPreview

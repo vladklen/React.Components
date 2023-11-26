@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { act, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { setupServer } from 'msw/node';
-import Home from '../../../src/pages/Home';
+import Home from '../../../src/pages';
 import { data } from '../../mocks/AnimeRespone';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';

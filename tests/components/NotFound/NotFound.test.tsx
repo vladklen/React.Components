@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Home from '../../../src/pages/Home';
+import Home from '../../../src/pages';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';
 import { renderWithProviders } from '../../utils/test-utils';

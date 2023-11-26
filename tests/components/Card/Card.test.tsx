@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { act, fireEvent, render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Home from '../../../src/pages/Home';
+import Home from '../../../src/pages';
 import { data, mockState, pagination } from '../../mocks/AnimeRespone';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/pages/NotFound';
