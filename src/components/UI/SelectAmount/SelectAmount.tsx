@@ -1,8 +1,6 @@
-import { SetStateAction } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { StyledSelect } from '../Styles';
-import { changePostsAmount } from '../../../store/postsPerPage/postsPerPage.slice';
 
 const OPTIONS = [
   { value: 1, label: '1' },
@@ -12,17 +10,19 @@ const OPTIONS = [
 
 export default function SelectAmount() {
   const router = useRouter();
-  const { query } = router;
+  const { pathname, query } = router;
+  const [, setLimit] = useState(query.limit || '10');
 
-  const dispatch = useDispatch();
-
-  const handleChange = (event: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    const limit = event.target.value;
-    dispatch(changePostsAmount(Number(limit)));
-
-    query.limit = `${limit}`;
+  const handleChange = (event: { target: { value: string } }) => {
+    setLimit(event.target.value);
+    query.limit = `${event.target.value}`;
+    router.replace(
+      { pathname, query: { ...query, limit: event.target.value } },
+      undefined,
+      {
+        scroll: false,
+      }
+    );
   };
 
   return (

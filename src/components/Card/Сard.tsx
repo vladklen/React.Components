@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { StyledCard, StyledCardPreview } from './Styles';
+import { StyledCard } from './Styles';
+import router, { useRouter } from 'next/router';
 
 interface CardProps {
   title: string;
@@ -9,19 +9,30 @@ interface CardProps {
 }
 
 function Card({ title, image, id }: CardProps) {
-  console.log(title);
-  return (
-    <Link href={`details/${id}`} data-testid={`test${id}`}>
-      <StyledCard>
-        <h3>{title}</h3>
-        <StyledCardPreview
-          style={{
-            backgroundImage: `url("${image}")`,
-          }}
-        />
-      </StyledCard>
-    </Link>
-  );
+  const router = useRouter();
+  const { pathname, query } = router;
+  const handleOpenDetails = () => {
+    router.push({
+      pathname,
+      query: {
+        ...query,
+        details: String(id),
+      },
+    });
+    return (
+      <div onClick={handleOpenDetails}>
+        <StyledCard>
+          <h3>{title}</h3>
+          <Image
+            src={image}
+            alt={`${title} preview`}
+            width={150}
+            height={200}
+          />
+        </StyledCard>
+      </div>
+    );
+  };
 }
 
 export { Card };
