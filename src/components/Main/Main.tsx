@@ -8,12 +8,11 @@ import { IDataState } from '@/types/types';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
 import CardList from '../CardList/CardList';
 import MyButton from '../UI/MyButton/MyButton';
 import MyInput from '../UI/MyInput/MyInput';
 import SelectAmount from '../UI/SelectAmount/SelectAmount';
-import { SearchWrapper, ContentWrapper } from '../UI/Styles';
+import { SearchWrapper, ContentWrapper } from '@/components/UI/Styles';
 import Pagination from '../UI/Pagination/Pagination';
 import PersonDetails from '../PersonalCard/PersonDetails';
 
@@ -67,6 +66,13 @@ export default function Main(data: IDataState) {
     );
   };
 
+  const handleCloseDetails = () => {
+    delete query.details;
+    router.push({ pathname, query: { ...query } }, undefined, {
+      scroll: false,
+    });
+  };
+
   return (
     <div>
       <SearchWrapper>
@@ -76,7 +82,9 @@ export default function Main(data: IDataState) {
       <h2>Results:</h2>
       <ContentWrapper>
         <CardList {...list} />
-        {id && data.details ? <PersonDetails {...details} /> : null}
+        {id && data.details ? (
+          <PersonDetails {...details} closeHandler={handleCloseDetails} />
+        ) : null}
       </ContentWrapper>
       <SelectAmount />
       <Pagination {...list} />

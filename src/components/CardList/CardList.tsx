@@ -1,5 +1,5 @@
 import { IAnime, IDataResponse } from '../../types/types';
-import { Card, CardProps } from '@/components/Card/Сard';
+import Card from '@/components/Card/Сard';
 
 export const TEXT_CONTENT = {
   ERROR: 'Items Not Found',

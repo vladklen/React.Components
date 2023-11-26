@@ -4,11 +4,18 @@ import MyButton from '../UI/MyButton/MyButton';
 import { StyledPersonalCard, StyledPersonalCardContent } from './Styles';
 import { IAnime } from '@/types/types';
 
-export default function PersonDetails(data: IAnime) {
-  const { title, title_japanese, rating, status, score, mal_id, images } = data;
+interface IDetailsProps extends IAnime {
+  closeHandler: () => void;
+}
+
+export default function PersonDetails(props: IDetailsProps) {
+  const { title, title_japanese, rating, status, score, mal_id, images } =
+    props;
+
+  const { closeHandler } = props;
 
   return (
-    <ModalWrapper onClick={() => {}} data-testid={`cardDetails${mal_id}`}>
+    <ModalWrapper onClick={closeHandler} data-testid={`cardDetails${mal_id}`}>
       <StyledPersonalCard>
         <Image
           src={images.jpg.image_url}
@@ -23,7 +30,7 @@ export default function PersonDetails(data: IAnime) {
           <p>Status:{status}</p>
           <p>Score: {score}</p>
           <MyButton
-            click={() => {}}
+            click={closeHandler}
             color="blue"
             message="Close"
             dataTest="test-CloseButton"

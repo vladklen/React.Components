@@ -39,7 +39,7 @@ export const animeApi = createApi({
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         const data = await queryFulfilled;
 
-        dispatch(setAnimeCardId({ animeDetails: data }));
+        dispatch(setAnimeCardId({ animeDetails: data.data }));
       },
     }),
   }),

@@ -11,6 +11,7 @@ import Main from '@/components/Main/Main';
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (context) => {
     const { page, search, limit, details } = context.query;
+    console.log(details);
 
     store.dispatch(
       getCardList.initiate({
