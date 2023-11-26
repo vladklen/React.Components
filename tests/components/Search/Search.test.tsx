@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { setupServer } from 'msw/node';
 import Home from '../../../src/pages';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-import NotFound from '../../../src/pages/NotFound';
+import NotFound from '../../../src/components/NotFound/NotFound';
 import { renderWithProviders } from '../../utils/test-utils';
 import { handlerWithData } from '../../mocks/node';
 

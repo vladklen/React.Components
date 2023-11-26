@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Home from '../../../src/pages';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-import NotFound from '../../../src/pages/NotFound';
+import NotFound from '../../../src/components/NotFound/NotFound';
 import { renderWithProviders } from '../../utils/test-utils';
 
 describe('Test 404 page', () => {

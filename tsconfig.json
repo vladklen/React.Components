@@ -19,7 +19,10 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true,
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [".eslintrc.cjs", "src", "tests", "next-env.d.ts"],
   "references": [

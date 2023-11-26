@@ -19,16 +19,15 @@ export const getServerSideProps: GetServerSideProps =
 
     store.dispatch(
       getCardList.initiate({
-        search: search?.toString() || '1',
-        page: page?.toString() || '',
-        limit: limit?.toString() || '20',
+        search: search?.toString() || '',
+        page: page?.toString() || '1',
+        limit: limit?.toString() || '10',
       })
     );
 
     if (details) {
       store.dispatch(getCardById.initiate(details.toString()));
     }
-    console.log('работает?/??');
     await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
     return {
@@ -77,7 +76,7 @@ export default function Home(data: IDataState) {
           />
         )} */}
         {/* {!isFetching && <CardList data={data} />} */}
-        <CardList list={list} />
+        <CardList {...list} />
         <Outlet />
       </ContentWrapper>
       {/* <SelectAmount /> */}

@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node';
 import Home from '../../../src/pages';
 import { data } from '../../mocks/AnimeRespone';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-import NotFound from '../../../src/pages/NotFound';
+import NotFound from '../../../src/components/NotFound/NotFound';
 import { renderWithProviders } from '../../utils/test-utils';
 import { handlerWithData } from '../../mocks/node';
 

@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Home from '../../../src/pages';
 import { data, mockState, pagination } from '../../mocks/AnimeRespone';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-import NotFound from '../../../src/pages/NotFound';
+import NotFound from '../../../src/components/NotFound/NotFound';
 import { useGetCardByIdQuery } from '../../../src/store/animeApi';
 
 vi.mock('react-redux', () => ({
