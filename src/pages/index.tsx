@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import { Outlet } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import { ContentWrapper, SearchWrapper } from '../components/UI/Styles';
 import CardList from '../components/CardList/CardList';
@@ -32,13 +31,14 @@ export const getServerSideProps: GetServerSideProps =
 
     return {
       props: {
-        list: store.getState().data,
+        list: store.getState().data.list,
         details: store.getState().data.details,
       },
     };
   });
 
 export default function Home(data: IDataState) {
+  console.log(data);
   const { list, details } = data;
   const router = useRouter();
   const { pathname, query } = router;
@@ -51,9 +51,13 @@ export default function Home(data: IDataState) {
 
   const handleSearchStart = () => {
     query.search = inputSearch;
-    router.push({ pathname, query: { ...query } }, undefined, {
-      scroll: false,
-    });
+    router.push(
+      { pathname, query: { ...query, search: inputSearch } },
+      undefined,
+      {
+        scroll: false,
+      }
+    );
   };
 
   return (
@@ -77,7 +81,6 @@ export default function Home(data: IDataState) {
         )} */}
         {/* {!isFetching && <CardList data={data} />} */}
         <CardList {...list} />
-        <Outlet />
       </ContentWrapper>
       {/* <SelectAmount /> */}
       {/* <Pagination postsPerPage={postPerPage.value} /> */}

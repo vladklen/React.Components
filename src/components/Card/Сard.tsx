@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { StyledCard, StyledCardPreview } from './Styles';
 
 interface CardProps {
@@ -8,6 +9,7 @@ interface CardProps {
 }
 
 function Card({ title, image, id }: CardProps) {
+  console.log(title);
   return (
     <Link href={`details/${id}`} data-testid={`test${id}`}>
       <StyledCard>

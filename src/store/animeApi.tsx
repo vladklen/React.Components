@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 import baseAPI from '../constants/api';
 import { IAnime, IDataResponse } from '../types/types';
+import { setAnimeCardId, setAnimeCardList } from './animeData/animeData.slice';
 
 export const animeApi = createApi({
   reducerPath: 'animeApi',
@@ -22,6 +23,11 @@ export const animeApi = createApi({
           url: `?q=${search}&page=${page}&limit=${limit}`,
         };
       },
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        const data = await queryFulfilled;
+
+        dispatch(setAnimeCardList({ animeList: data.data }));
+      },
     }),
     getCardById: builder.query<IAnime, string>({
       query: (id) => {
@@ -30,6 +36,11 @@ export const animeApi = createApi({
         };
       },
       transformResponse: (response: { data: IAnime }) => response.data,
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        const data = await queryFulfilled;
+
+        dispatch(setAnimeCardId({ animeDetails: data }));
+      },
     }),
   }),
 });

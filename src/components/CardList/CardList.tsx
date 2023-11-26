@@ -6,9 +6,8 @@ export const TEXT_CONTENT = {
 };
 
 export default function CardList(list: IDataResponse) {
-  console.log(list);
   const { data } = list;
-  if (!data) {
+  if (!list) {
     return <h3>{TEXT_CONTENT.ERROR}</h3>;
   }
   return data.map((el: IAnime) => (
