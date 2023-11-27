@@ -1,12 +1,13 @@
 import { afterAll, afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { act, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+
 import { setupServer } from 'msw/node';
 import Home from '../../../src/pages';
 import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
 import NotFound from '../../../src/components/NotFound/NotFound';
 import { renderWithProviders } from '../../utils/test-utils';
 import { handlerWithData } from '../../mocks/node';
+import { data, response } from '../../mocks/AnimeRespone';
 
 const server = setupServer(...handlerWithData);
 
@@ -18,14 +19,7 @@ describe('Test Search component', () => {
   afterAll(() => server.close());
   test('Verify that clicking the Search button saves the entered value to the local storage', async () => {
     const wrapper = renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="details/:id" element={<PersonDetails />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </MemoryRouter>
+      <Home list={response} details={data[0]} />
     );
 
     const input = await wrapper.findByRole('textbox');
@@ -43,14 +37,7 @@ describe('Test Search component', () => {
     localStorage.setItem('test', 'test value');
 
     const wrapper = renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="details/:id" element={<PersonDetails />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </MemoryRouter>
+      <Home list={response} details={data[0]} />
     );
 
     const input = (await wrapper.findByRole('textbox')) as HTMLInputElement;

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
+import App from 'next/app';
 import { describe, test } from 'vitest';
-import App from '../../../src/App';
 
 describe('App tests', () => {
   test('renders app', () => {

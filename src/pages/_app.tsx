@@ -3,9 +3,31 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { wrapper } from '../store/store';
 import ErrorBoundary from '../components/UI/ErrorBoundary/ErrorBoundary';
+import React from 'react';
+import { Router } from 'next/router';
+import { ColorRing } from 'react-loader-spinner';
 
 export default function App({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
+  const [loading, setLoading] = React.useState(false);
+  React.useEffect(() => {
+    const start = () => {
+      console.log('start');
+      setLoading(true);
+    };
+    const end = () => {
+      console.log('findished');
+      setLoading(false);
+    };
+    Router.events.on('routeChangeStart', start);
+    Router.events.on('routeChangeComplete', end);
+    Router.events.on('routeChangeError', end);
+    return () => {
+      Router.events.off('routeChangeStart', start);
+      Router.events.off('routeChangeComplete', end);
+      Router.events.off('routeChangeError', end);
+    };
+  }, []);
   return (
     <>
       <Head>
@@ -16,7 +38,19 @@ export default function App({ Component, ...rest }: AppProps) {
       </Head>
       <ErrorBoundary>
         <Provider store={store}>
-          <Component {...props.pageProps} />
+          {loading ? (
+            <ColorRing
+              visible
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />
+          ) : (
+            <Component {...props.pageProps} />
+          )}
         </Provider>
       </ErrorBoundary>
     </>
