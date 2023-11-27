@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Test Card component > Ensure that the card component renders the relevant card data; 1`] = `
+<div
+  class="sc-eCAqax fHGSqI"
+  data-testid="card"
+>
+  <h3>
+    Test title #1
+  </h3>
+  <img
+    alt="Test title #1 preview"
+    data-nimg="1"
+    decoding="async"
+    height="200"
+    loading="lazy"
+    src="/_next/image?url=url%3Apage1&w=384&q=75"
+    srcset="/_next/image?url=url%3Apage1&w=256&q=75 1x, /_next/image?url=url%3Apage1&w=384&q=75 2x"
+    style="color: transparent;"
+    width="150"
+  />
+</div>
+`;
