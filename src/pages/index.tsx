@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Main from '@/components/Main/Main';
 import { wrapper } from '../store/store';
 import {
   getCardById,
@@ -6,12 +7,10 @@ import {
   getRunningQueriesThunk,
 } from '../store/animeApi';
 import { IDataState } from '../types/types';
-import Main from '@/components/Main/Main';
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async (context) => {
     const { page, search, limit, details } = context.query;
-    console.log(details);
 
     store.dispatch(
       getCardList.initiate({

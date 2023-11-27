@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import Image from 'next/image';
+import { IAnime } from '@/types/types';
 import { ModalWrapper } from '../UI/Styles';
 import MyButton from '../UI/MyButton/MyButton';
 import { StyledPersonalCard, StyledPersonalCardContent } from './Styles';
-import { IAnime } from '@/types/types';
 
 interface IDetailsProps extends IAnime {
   closeHandler: () => void;

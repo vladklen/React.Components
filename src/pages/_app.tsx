@@ -1,22 +1,20 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { wrapper } from '../store/store';
-import ErrorBoundary from '../components/UI/ErrorBoundary/ErrorBoundary';
 import React from 'react';
 import { Router } from 'next/router';
 import { ColorRing } from 'react-loader-spinner';
+import { wrapper } from '../store/store';
+import ErrorBoundary from '../components/UI/ErrorBoundary/ErrorBoundary';
 
 export default function App({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const [loading, setLoading] = React.useState(false);
   React.useEffect(() => {
     const start = () => {
-      console.log('start');
       setLoading(true);
     };
     const end = () => {
-      console.log('findished');
       setLoading(false);
     };
     Router.events.on('routeChangeStart', start);

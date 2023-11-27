@@ -1,52 +1,30 @@
-import { RenderResult, act, fireEvent } from '@testing-library/react';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import { describe, expect, test } from 'vitest';
 import Pagination from '../../../src/components/UI/Pagination/Pagination';
-import { paginationProps } from '../../mocks/AnimeRespone';
-import { renderWithProviders } from '../../utils/test-utils';
+import { response } from '../../mocks/AnimeRespone';
+import { createMockRouter } from '../../mocks/mockRouter';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 
-const CURRENT_PAGE = '5';
-const CLICK_PAGE = 3;
-
-const history = createMemoryHistory();
-
-vi.mock('react-router-dom', async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const actual = await vi.importActual<any>('react-router-dom');
-  return {
-    ...actual,
-    useSearchParams: () => {
-      const setSearch = (url: { page: string }) =>
-        history.push({
-          search: `page=${url.page}`,
-        });
-      const search = {
-        get: () => CURRENT_PAGE,
-        *[Symbol.iterator]() {
-          yield ['page', `${CURRENT_PAGE}`];
-        },
-      };
-      return [search, setSearch];
-    },
-  };
-});
+const CLICK_PAGE = 1;
 
 describe('Pagination tests', () => {
-  let wrapper: RenderResult;
-  beforeEach(() => {
-    wrapper = renderWithProviders(
-      <Router location={history.location} navigator={history}>
-        <Pagination {...paginationProps} />
-      </Router>
-    );
-  });
-
   test('Updates URL query parameter when click next page', async () => {
+    const routerParamsMock = {
+      pathname: '/',
+      query: { page: `` },
+    };
+    const mockRouter = createMockRouter(routerParamsMock);
+    const wrapper = render(
+      <RouterContext.Provider value={mockRouter}>
+        <Pagination {...response} />
+      </RouterContext.Provider>
+    );
     const el = await wrapper.findByText(`${CLICK_PAGE}`);
-    act(() => {
-      fireEvent.click(el);
+    fireEvent.click(el);
+    console.log(mockRouter);
+    expect(mockRouter).toMatchObject({
+      pathname: '/',
+      query: { page: `${CLICK_PAGE}` },
     });
-    expect(history.location.search).toBe(`page=${CLICK_PAGE}`);
   });
 });

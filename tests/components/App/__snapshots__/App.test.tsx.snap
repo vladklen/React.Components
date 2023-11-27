@@ -1,0 +1,390 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App tests > renders app 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div
+          class="sc-gtsqUy hcPYHT"
+        >
+          <input
+            class="sc-iCoHzw jmVnpj"
+            type="text"
+            value=""
+          />
+          <button
+            class="sc-gKAaef fTQyHl"
+            data-testid="testButton"
+            type="button"
+          >
+            Search
+             
+          </button>
+        </div>
+        <h2>
+          Results:
+        </h2>
+        <div
+          class="sc-bdnyFh fBMALl"
+        >
+          <div
+            data-testid="card_1"
+          >
+            <div
+              class="sc-eCAqax fHGSqI"
+              data-testid="card"
+            >
+              <h3>
+                Test title #1
+              </h3>
+              <img
+                alt="Test title #1 preview"
+                data-nimg="1"
+                decoding="async"
+                height="200"
+                loading="lazy"
+                src="/_next/image?url=url%3Apage1&w=384&q=75"
+                srcset="/_next/image?url=url%3Apage1&w=256&q=75 1x, /_next/image?url=url%3Apage1&w=384&q=75 2x"
+                style="color: transparent;"
+                width="150"
+              />
+            </div>
+          </div>
+          <div
+            data-testid="card_2"
+          >
+            <div
+              class="sc-eCAqax fHGSqI"
+              data-testid="card"
+            >
+              <h3>
+                Test title #2
+              </h3>
+              <img
+                alt="Test title #2 preview"
+                data-nimg="1"
+                decoding="async"
+                height="200"
+                loading="lazy"
+                src="/_next/image?url=url%3Apage2&w=384&q=75"
+                srcset="/_next/image?url=url%3Apage2&w=256&q=75 1x, /_next/image?url=url%3Apage2&w=384&q=75 2x"
+                style="color: transparent;"
+                width="150"
+              />
+            </div>
+          </div>
+          <div
+            data-testid="card_3"
+          >
+            <div
+              class="sc-eCAqax fHGSqI"
+              data-testid="card"
+            >
+              <h3>
+                Test title #3
+              </h3>
+              <img
+                alt="Test title #3 preview"
+                data-nimg="1"
+                decoding="async"
+                height="200"
+                loading="lazy"
+                src="/_next/image?url=url%3Apage3&w=384&q=75"
+                srcset="/_next/image?url=url%3Apage3&w=256&q=75 1x, /_next/image?url=url%3Apage3&w=384&q=75 2x"
+                style="color: transparent;"
+                width="150"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="sc-hKFymg dNEsVI"
+        >
+          <select>
+            <option
+              value="1"
+            >
+              1
+            </option>
+            <option
+              value="5"
+            >
+              5
+            </option>
+            <option
+              value="10"
+            >
+              10
+            </option>
+          </select>
+        </div>
+        <ul
+          aria-label="Pagination"
+          class="sc-fujznN gOanmM"
+          role="navigation"
+        >
+          <li
+            class="previous disabled"
+          >
+            <a
+              aria-disabled="true"
+              aria-label="Previous page"
+              class=" "
+              rel="prev"
+              role="button"
+              tabindex="-1"
+            >
+              &lt;
+            </a>
+          </li>
+          <li
+            class="active"
+          >
+            <a
+              aria-current="page"
+              aria-label="Page 1 is your current page"
+              rel="canonical"
+              role="button"
+              tabindex="-1"
+            >
+              1
+            </a>
+          </li>
+          <li
+            class="next disabled"
+          >
+            <a
+              aria-disabled="true"
+              aria-label="Next page"
+              class=" "
+              rel="next"
+              role="button"
+              tabindex="-1"
+            >
+              &gt;
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="sc-gtsqUy hcPYHT"
+      >
+        <input
+          class="sc-iCoHzw jmVnpj"
+          type="text"
+          value=""
+        />
+        <button
+          class="sc-gKAaef fTQyHl"
+          data-testid="testButton"
+          type="button"
+        >
+          Search
+           
+        </button>
+      </div>
+      <h2>
+        Results:
+      </h2>
+      <div
+        class="sc-bdnyFh fBMALl"
+      >
+        <div
+          data-testid="card_1"
+        >
+          <div
+            class="sc-eCAqax fHGSqI"
+            data-testid="card"
+          >
+            <h3>
+              Test title #1
+            </h3>
+            <img
+              alt="Test title #1 preview"
+              data-nimg="1"
+              decoding="async"
+              height="200"
+              loading="lazy"
+              src="/_next/image?url=url%3Apage1&w=384&q=75"
+              srcset="/_next/image?url=url%3Apage1&w=256&q=75 1x, /_next/image?url=url%3Apage1&w=384&q=75 2x"
+              style="color: transparent;"
+              width="150"
+            />
+          </div>
+        </div>
+        <div
+          data-testid="card_2"
+        >
+          <div
+            class="sc-eCAqax fHGSqI"
+            data-testid="card"
+          >
+            <h3>
+              Test title #2
+            </h3>
+            <img
+              alt="Test title #2 preview"
+              data-nimg="1"
+              decoding="async"
+              height="200"
+              loading="lazy"
+              src="/_next/image?url=url%3Apage2&w=384&q=75"
+              srcset="/_next/image?url=url%3Apage2&w=256&q=75 1x, /_next/image?url=url%3Apage2&w=384&q=75 2x"
+              style="color: transparent;"
+              width="150"
+            />
+          </div>
+        </div>
+        <div
+          data-testid="card_3"
+        >
+          <div
+            class="sc-eCAqax fHGSqI"
+            data-testid="card"
+          >
+            <h3>
+              Test title #3
+            </h3>
+            <img
+              alt="Test title #3 preview"
+              data-nimg="1"
+              decoding="async"
+              height="200"
+              loading="lazy"
+              src="/_next/image?url=url%3Apage3&w=384&q=75"
+              srcset="/_next/image?url=url%3Apage3&w=256&q=75 1x, /_next/image?url=url%3Apage3&w=384&q=75 2x"
+              style="color: transparent;"
+              width="150"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-hKFymg dNEsVI"
+      >
+        <select>
+          <option
+            value="1"
+          >
+            1
+          </option>
+          <option
+            value="5"
+          >
+            5
+          </option>
+          <option
+            value="10"
+          >
+            10
+          </option>
+        </select>
+      </div>
+      <ul
+        aria-label="Pagination"
+        class="sc-fujznN gOanmM"
+        role="navigation"
+      >
+        <li
+          class="previous disabled"
+        >
+          <a
+            aria-disabled="true"
+            aria-label="Previous page"
+            class=" "
+            rel="prev"
+            role="button"
+            tabindex="-1"
+          >
+            &lt;
+          </a>
+        </li>
+        <li
+          class="active"
+        >
+          <a
+            aria-current="page"
+            aria-label="Page 1 is your current page"
+            rel="canonical"
+            role="button"
+            tabindex="-1"
+          >
+            1
+          </a>
+        </li>
+        <li
+          class="next disabled"
+        >
+          <a
+            aria-disabled="true"
+            aria-label="Next page"
+            class=" "
+            rel="next"
+            role="button"
+            tabindex="-1"
+          >
+            &gt;
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

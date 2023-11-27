@@ -1,23 +1,26 @@
 import { describe, expect, test } from 'vitest';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Home from '../../../src/pages';
-import PersonDetails from '../../../src/components/PersonalCard/PersonDetails';
-import NotFound from '../../../src/components/NotFound/NotFound';
-import { renderWithProviders } from '../../utils/test-utils';
+import { createMockRouter } from '../../mocks/mockRouter';
+import { render } from '@testing-library/react';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
+import NotFound from '@/components/NotFound/NotFound';
 
 describe('Test 404 page', () => {
   test('Ensure that the 404 page is displayed when navigating to an invalid route', async () => {
-    const wrapper = renderWithProviders(
-      <MemoryRouter initialEntries={['/error']}>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="details/:id" element={<PersonDetails />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </MemoryRouter>
+    const routerParamsMock = {
+      pathname: '/test',
+      query: {
+        page: '1',
+      },
+    };
+    const mockRouter = createMockRouter(routerParamsMock);
+
+    const wrapper = render(
+      <RouterContext.Provider value={mockRouter}>
+        <NotFound />
+      </RouterContext.Provider>
     );
 
-    expect(await wrapper.findByText(`Page not found!`)).toBeTruthy();
+    expect(wrapper.getByText(/Page not found!/i)).toBeTruthy();
+    expect(wrapper.getByRole('link', { name: /Home/i })).toBeTruthy();
   });
 });

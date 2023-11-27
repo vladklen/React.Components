@@ -52,6 +52,17 @@ export const response: IDataResponse = {
   },
 };
 
+export const failResponse: IDataResponse = {
+  data: [],
+  pagination: {
+    items: {
+      count: 3,
+      per_page: 3,
+      total: 30,
+    },
+  },
+};
+
 export const paginationProps = {
   postsPerPage: 10,
   totalPosts: 100,

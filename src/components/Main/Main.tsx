@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import {
   getCardList,
   getCardById,
@@ -8,11 +9,11 @@ import { IDataState } from '@/types/types';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { SearchWrapper, ContentWrapper } from '@/components/UI/Styles';
 import CardList from '../CardList/CardList';
 import MyButton from '../UI/MyButton/MyButton';
 import MyInput from '../UI/MyInput/MyInput';
 import SelectAmount from '../UI/SelectAmount/SelectAmount';
-import { SearchWrapper, ContentWrapper } from '@/components/UI/Styles';
 import Pagination from '../UI/Pagination/Pagination';
 import PersonDetails from '../PersonalCard/PersonDetails';
 
