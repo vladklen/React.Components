@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "cd ../ && husky install ./React.Forms/.husky"
+    "prepare": "cd ../ && husky install ./React.Forms/.husky",
+    "fix": "prettier . --write"
   },
   "dependencies": {
     "react": "^18.2.0",
