@@ -40,3 +40,52 @@
 .read-the-docs {
   color: #888;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form p {
+  color: red;
+}
+
+main > div {
+  border: 2px solid blue;
+  border-radius: 10px;
+}
+
+.active {
+  background-color: rgb(33, 56, 56);
+}
+
+.header-div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  list-style: none;
+}
+
+a.active {
+  color: aqua;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}

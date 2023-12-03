@@ -6,8 +6,8 @@ const PathConstants = {
 
 const PathRoutesNames = {
   HOME: 'MAIN',
-  FIRST_FORM: 'FORM #1',
-  SECOND_FORM: 'FORM #2',
+  FIRST_FORM: 'Uncontrolled',
+  SECOND_FORM: 'React Hook Form',
 };
 
 export { PathConstants, PathRoutesNames };
