@@ -52,11 +52,11 @@ export const FirstForm = () => {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
+    <form ref={formRef} onSubmit={handleSubmit} autoComplete="on">
       <label>
         <span>{FormFields.name}</span>
       </label>
-      <input type="text" ref={nameRef} />
+      <input type="text" ref={nameRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.name)?.message}
@@ -66,7 +66,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.age}</span>
       </label>
-      <input type="number" ref={ageRef} />
+      <input type="number" ref={ageRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.age)?.message}
@@ -76,7 +76,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.email}</span>
       </label>
-      <input type="text" ref={emailRef} />
+      <input type="text" ref={emailRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.email)?.message}
@@ -86,7 +86,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.password}</span>
       </label>
-      <input type="text" ref={passwordRef} />
+      <input type="text" ref={passwordRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.password)?.message}
@@ -96,7 +96,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.confirmPassword}</span>
       </label>
-      <input type="text" ref={confirmPasswordRef} />
+      <input type="text" ref={confirmPasswordRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.confirmPassword)?.message}
@@ -106,7 +106,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.image}</span>
       </label>
-      <input type="file" ref={imageRef} />
+      <input type="file" ref={imageRef} autoComplete="on" />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.image)?.message}
@@ -116,7 +116,7 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.gender}</span>
       </label>
-      <select ref={genderRef}>
+      <select ref={genderRef} autoComplete="on">
         {(Object.keys(genderFields) as Array<keyof typeof genderFields>).map(
           (key, index) => {
             return (
@@ -136,7 +136,13 @@ export const FirstForm = () => {
       <label>
         <span>{FormFields.country}</span>
       </label>
-      <select ref={countryRef}>
+      <input
+        type="search"
+        list={FormFields.country}
+        placeholder="Enter country.."
+        autoComplete="on"
+      />
+      <datalist id={FormFields.country}>
         {countries.countries.map((el, index) => {
           return (
             <option key={index} value={el}>
@@ -144,12 +150,17 @@ export const FirstForm = () => {
             </option>
           );
         })}
-      </select>
+      </datalist>
 
       <label htmlFor={FormFields.accept}>
         <span>{FormFields.accept}</span>
       </label>
-      <input name={FormFields.accept} type="checkbox" ref={acceptRef} />
+      <input
+        name={FormFields.accept}
+        type="checkbox"
+        ref={acceptRef}
+        autoComplete="on"
+      />
       {errors.length ? (
         <p style={{ color: 'red' }}>
           {errors.find((e) => e.path === FormFields.accept)?.message}

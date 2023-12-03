@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import formSchema from '../utils/formSchema';
 import { useForm } from 'react-hook-form';
 import { DataType, FormFields, genderFields } from '../types/types';
-import COUNTRIES from '../data/countries';
 import { IFormData, addUser } from '../store/Slices/formData.slice';
 import { toBase64 } from '../utils/imageTransform';
 import { useAppDispatch } from '../hooks/redux';
@@ -72,7 +71,13 @@ export const SecondForm = () => {
       {errors.gender ? <p>{errors.gender.message}</p> : null}
 
       <label htmlFor={FormFields.country}>{FormFields.country}</label>
-      <select {...register('country')}>
+      <input
+        type="search"
+        list={FormFields.country}
+        placeholder="Enter country.."
+        autoComplete="on"
+      />
+      <datalist id={FormFields.country} {...register('country')}>
         {countries.countries.map((el, index) => {
           return (
             <option key={index} value={el}>
@@ -80,7 +85,7 @@ export const SecondForm = () => {
             </option>
           );
         })}
-      </select>
+      </datalist>
       {errors.country ? <p>{errors.country.message}</p> : null}
 
       <label htmlFor={FormFields.accept}>{FormFields.accept}</label>
